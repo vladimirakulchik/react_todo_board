@@ -1,0 +1,33 @@
+.app-toolbar {
+    background-color: #4CAF50 !important;
+}
+
+.app-toolbar-icon {
+    color: white !important;
+}
+
+.app-toolbar-icon-button {
+    margin-left: 10px !important;
+    background-color: #81C784 !important;
+    border-radius: 5px;
+}
+
+.app-toolbar-icon-button:hover {
+    background-color: #8BC34A !important;
+}
+
+.app-toolbar-title {
+    color: #ECEFF1 !important;
+}
+
+.app-toolbar-button {
+    background-color: #81C784 !important;
+    color: white !important;
+    margin: 0 50px !important;
+    height: 48px !important;
+    border-radius: 5px;
+}
+
+.app-toolbar-button:hover {
+    background-color: #8BC34A !important;
+}
