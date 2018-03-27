@@ -6,8 +6,16 @@ import './App.css';
 function App() {
     return (
         <MuiThemeProvider>
-            <div className="App">
-                <AppToolbar/>
+            <div className="app">
+                <div className="header">
+                    <AppToolbar/>
+                </div>
+
+                <div className="content">
+                    <div className="board scrollbar">
+
+                    </div>
+                </div>
             </div>
         </MuiThemeProvider>
     );

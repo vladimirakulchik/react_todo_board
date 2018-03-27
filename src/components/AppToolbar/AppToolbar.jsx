@@ -13,22 +13,23 @@ class AppToolbar extends React.Component {
     render() {
         return (
             <Toolbar className="app-toolbar">
-                <ToolbarGroup firstChild={true}>
-                    <IconButton className="app-toolbar-icon-button">
+                <ToolbarGroup firstChild={true} className="app-toolbar-undo">
+                    <IconButton className="app-toolbar-icon-btn">
                         <ContentUndo className="app-toolbar-icon" />
                     </IconButton>
-                    <IconButton className="app-toolbar-icon-button">
+                    <IconButton className="app-toolbar-icon-btn">
                         <ContentRedo className="app-toolbar-icon" />
                     </IconButton>
                 </ToolbarGroup>
 
-                <ToolbarTitle text="TODO Board" className="app-toolbar-title" />
+                <ToolbarTitle className="app-toolbar-title" text="TODO Board" />
 
-                <ToolbarGroup lastChild={false}>
-                    <FlatButton label="Add a list" className="app-toolbar-button" />
+                <ToolbarGroup lastChild={false} className="app-toolbar-settings">
+                    <FlatButton label="Add a list" className="app-toolbar-add-btn" />
+
                     <IconMenu
                         iconButtonElement={
-                            <IconButton className="app-toolbar-icon-button">
+                            <IconButton className="app-toolbar-icon-btn">
                                 <ActionSettings className="app-toolbar-icon" />
                             </IconButton>
                         }

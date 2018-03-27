@@ -1,33 +1,50 @@
 .app-toolbar {
-    background-color: #4CAF50 !important;
+    background-color: transparent !important;
+    height: 100% !important;
+    padding: 0 !important;
+}
+
+.app-toolbar-title {
+    color: #ECEFF1 !important;
+    font-size: 24px !important;
+    line-height: 45px !important;
+    padding: 0 !important;
+    margin: 0 16px !important;
+}
+
+.app-toolbar-undo {
+    margin: 0 !important;
+}
+
+.app-toolbar-settings {
+    margin: 0 !important;
+}
+
+.app-toolbar-icon-btn {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    width: 40px !important;
+    height: 40px !important;
+    margin-right: 8px !important;
+    padding: 8px !important;
+    border-radius: 5px !important;
+}
+
+.app-toolbar-icon-btn:hover {
+    background-color: #8BC34A !important;
 }
 
 .app-toolbar-icon {
     color: white !important;
 }
 
-.app-toolbar-icon-button {
-    margin-left: 10px !important;
-    background-color: #81C784 !important;
-    border-radius: 5px;
-}
-
-.app-toolbar-icon-button:hover {
-    background-color: #8BC34A !important;
-}
-
-.app-toolbar-title {
-    color: #ECEFF1 !important;
-}
-
-.app-toolbar-button {
-    background-color: #81C784 !important;
+.app-toolbar-add-btn {
     color: white !important;
-    margin: 0 50px !important;
-    height: 48px !important;
-    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    height: 40px !important;
+    margin: 0 16px !important;
+    border-radius: 5px !important;
 }
 
-.app-toolbar-button:hover {
+.app-toolbar-add-btn:hover {
     background-color: #8BC34A !important;
 }
