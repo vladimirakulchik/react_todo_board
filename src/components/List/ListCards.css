@@ -1,0 +1,45 @@
+.list:first-child {
+    margin-left: 20px !important;
+}
+
+.list {
+    width: 270px !important;
+    height: 100% !important;
+    margin: 0 10px !important;
+    display: inline-block !important;
+    vertical-align: top !important;
+    white-space: nowrap !important;
+}
+
+.list-content {
+    background-color: #EEEEEE !important;
+    border-radius: 5px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 100% !important;
+    position: relative !important;
+    white-space: normal !important;
+}
+
+.list-header {
+    flex: 0 0 auto;
+    padding: 8px 10px;
+    position: relative;
+    min-height: 18px;
+}
+
+.list-cards {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: 0 4px;
+    padding: 0 4px;
+    min-height: 0;
+}
+
+.list-add-card-btn {
+    flex: 0 0 auto;
+    padding: 8px 10px;
+    position: relative;
+    min-height: 18px;
+}
