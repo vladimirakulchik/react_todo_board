@@ -1,12 +1,12 @@
 import React from 'react';
 import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
-import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
 import ContentUndo from 'material-ui/svg-icons/content/undo';
 import ContentRedo from 'material-ui/svg-icons/content/redo';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
+import AddListButton from './AddListButton';
 import './AppToolbar.css';
 
 class AppToolbar extends React.Component {
@@ -25,7 +25,7 @@ class AppToolbar extends React.Component {
                 <ToolbarTitle className="app-toolbar-title" text="TODO Board" />
 
                 <ToolbarGroup lastChild={false} className="app-toolbar-settings">
-                    <FlatButton label="Add a list" className="app-toolbar-add-btn" />
+                    <AddListButton />
 
                     <IconMenu
                         iconButtonElement={
