@@ -1,5 +1,6 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
+import ListHeader from './ListHeader';
 import './ListCards.css';
 import '../Scrollbar.css';
 
@@ -8,9 +9,7 @@ class ListCards extends React.Component {
         return(
             <div className="list">
                 <Paper className="list-content" zDepth={3}>
-                    <div className="list-header">
-                        HEADER
-                    </div>
+                    <ListHeader title="List title" />
 
                     <div className="list-cards scrollbar">
                         CARD

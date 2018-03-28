@@ -21,13 +21,6 @@
     white-space: normal !important;
 }
 
-.list-header {
-    flex: 0 0 auto;
-    padding: 8px 10px;
-    position: relative;
-    min-height: 18px;
-}
-
 .list-cards {
     flex: 1 1 auto;
     overflow-y: auto;
