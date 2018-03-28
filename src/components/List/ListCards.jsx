@@ -1,6 +1,7 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
 import ListHeader from './ListHeader';
+import AddCardButton from './AddCardButton';
 import './ListCards.css';
 import '../Scrollbar.css';
 
@@ -15,9 +16,7 @@ class ListCards extends React.Component {
                         CARD
                     </div>
 
-                    <div className="list-add-card-btn">
-                        BUTTON
-                    </div>
+                    <AddCardButton />
                 </Paper>
             </div>
         );

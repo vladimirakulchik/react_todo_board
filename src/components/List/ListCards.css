@@ -17,6 +17,7 @@
     display: flex !important;
     flex-direction: column !important;
     max-height: 100% !important;
+    min-height: 70px !important;
     position: relative !important;
     white-space: normal !important;
 }
@@ -28,11 +29,4 @@
     margin: 0 4px;
     padding: 0 4px;
     min-height: 0;
-}
-
-.list-add-card-btn {
-    flex: 0 0 auto;
-    padding: 8px 10px;
-    position: relative;
-    min-height: 18px;
 }
