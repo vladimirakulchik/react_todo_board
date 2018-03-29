@@ -1,14 +1,14 @@
-.list:first-child {
-    margin-left: 20px !important;
-}
-
-.list {
+.list-wrapper {
     width: 270px !important;
     height: 100% !important;
     margin: 0 10px !important;
     display: inline-block !important;
     vertical-align: top !important;
     white-space: nowrap !important;
+}
+
+.list-wrapper:first-child {
+    margin-left: 20px !important;
 }
 
 .list-content {
