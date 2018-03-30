@@ -1,0 +1,31 @@
+.card-details {
+    position: relative;
+    padding: 0 !important;
+    cursor: pointer !important;
+}
+
+.card-title {
+    padding: 6px 6px 2px 8px !important;
+}
+
+.card-text {
+    padding: 6px 6px 6px 8px !important;
+}
+
+.card-edit-btn {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+    opacity: 0.8 !important;
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 3px !important;
+    padding: 4px !important;
+    margin: 4px !important;
+    position: absolute !important;
+    top: 4px;
+    right: 4px;
+    display: none !important;
+}
+
+.card-details:hover .card-edit-btn {
+    display:block !important;
+}
