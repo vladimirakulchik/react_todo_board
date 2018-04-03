@@ -1,17 +1,17 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
-import ListHeader from './WrapperHeader';
+import Header from './Header';
 import ListCards from '../ListCards/ListCards';
 import AddCardButton from './AddCardButton';
-import './ListWrapper.css';
+import './Column.css';
 import '../Scrollbar.css';
 
-class ListWrapper extends React.Component {
+class Column extends React.Component {
     render() {
         return(
-            <div className="list-wrapper">
-                <Paper className="list-content" zDepth={3}>
-                    <ListHeader title="List title" />
+            <div className="column">
+                <Paper className="column-content" zDepth={3}>
+                    <Header title="List title" />
 
                     <ListCards />
 
@@ -22,4 +22,4 @@ class ListWrapper extends React.Component {
     }
 }
 
-export default ListWrapper;
+export default Column;

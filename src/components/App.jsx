@@ -1,7 +1,7 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppToolbar from './AppToolbar/AppToolbar';
-import ListWrapper from './ListWrapper/ListWrapper';
+import Column from './Column/Column';
 import './App.css';
 import './Scrollbar.css';
 
@@ -15,7 +15,7 @@ function App() {
 
                 <div className="content">
                     <div className="board scrollbar">
-                        <ListWrapper />
+                        <Column />
                     </div>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-.list-wrapper {
+.column {
     width: 270px !important;
     height: 100% !important;
     margin: 0 10px !important;
@@ -7,11 +7,11 @@
     white-space: nowrap !important;
 }
 
-.list-wrapper:first-child {
+.column:first-child {
     margin-left: 20px !important;
 }
 
-.list-content {
+.column-content {
     background-color: #EEEEEE !important;
     border-radius: 5px !important;
     display: flex !important;
