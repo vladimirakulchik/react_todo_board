@@ -5,7 +5,7 @@ import './Popup.css';
 
 class Popup extends React.Component {
     render() {
-        const {title, isOpen, onSave, onCancel, children} = this.props;
+        const {popupStyle, title, isOpen, onSave, onCancel, children} = this.props;
 
         const actions = [
             <RaisedButton className="action-btn"
@@ -21,17 +21,16 @@ class Popup extends React.Component {
         ];
 
         return(
-            <div>
-                <Dialog
-                    title={title}
-                    actions={actions}
-                    modal={false}
-                    open={isOpen}
-                    onRequestClose={onCancel}
-                >
-                    {children}
-                </Dialog>
-            </div>
+            <Dialog
+                title={title}
+                actions={actions}
+                modal={false}
+                open={isOpen}
+                onRequestClose={onCancel}
+                contentClassName={popupStyle}
+            >
+                {children}
+            </Dialog>
         )
     }
 }

@@ -10,3 +10,12 @@
 .add-list-btn:hover {
     background-color: #8BC34A !important;
 }
+
+.add-list-popup {
+    width: 20% !important;
+    max-width: none !important;
+}
+
+.add-list-tf{
+    width: 100% !important;
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
 import Popup from '../Popup/Popup';
 import './AddListButton.css';
 
@@ -26,12 +27,16 @@ class AddListButton extends React.Component {
                 </FlatButton>
 
                 <Popup
+                    popupStyle="add-list-popup"
                     title="Add a list"
                     isOpen={this.state.open}
                     onSave={this.onSave}
                     onCancel={this.togglePopup}
                 >
-                    Popup text.
+                    <TextField
+                        className="add-list-tf"
+                        floatingLabelText="List title"
+                    />
                 </Popup>
             </div>
         )
