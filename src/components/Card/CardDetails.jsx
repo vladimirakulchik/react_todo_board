@@ -18,8 +18,10 @@ class CardDetails extends React.Component {
     }
 
     render() {
+        const {color} = this.props;
+
         return (
-            <Card className="card-details" style={{backgroundColor: "white"}}>
+            <Card className="card-details" style={{backgroundColor: color}}>
                 <IconButton className="card-edit-btn">
                     <ModeEdit />
                 </IconButton>

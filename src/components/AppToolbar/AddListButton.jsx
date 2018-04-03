@@ -7,6 +7,7 @@ import './AddListButton.css';
 class AddListButton extends React.Component {
     state = {
         open: false,
+        textFieldValue: ""
     };
 
     togglePopup = () => {
@@ -17,6 +18,18 @@ class AddListButton extends React.Component {
 
     onSave = () => {
         this.togglePopup();
+    };
+
+    handleTextFieldChange = (e) => {
+        let title = e.target.value;
+
+        if (title.length <= 20) {
+            this.setState({
+                textFieldValue: e.target.value
+            });
+        } else {
+            e.target.value = this.state.textFieldValue;
+        }
     };
 
     render() {
@@ -35,7 +48,11 @@ class AddListButton extends React.Component {
                 >
                     <TextField
                         className="add-list-tf"
+                        onChange={this.handleTextFieldChange}
                         floatingLabelText="List title"
+                        floatingLabelStyle={{color: "green"}}
+                        floatingLabelFocusStyle={{color: "gray"}}
+                        underlineStyle={{borderColor: "green"}}
                     />
                 </Popup>
             </div>

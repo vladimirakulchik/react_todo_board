@@ -5,8 +5,8 @@ import './Item.css';
 
 function Item() {
     return (
-        <ListItem className="list-cards-item" disabled={true}>
-            <CardDetails />
+        <ListItem className="list-cards-item">
+            <CardDetails color="white"/>
         </ListItem>
     );
 }

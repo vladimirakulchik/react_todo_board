@@ -9,14 +9,14 @@ class Popup extends React.Component {
 
         const actions = [
             <RaisedButton className="action-btn"
+                          label="Save"
+                          primary={true}
+                          onClick={onSave}
+            />,
+            <RaisedButton className="action-btn"
                 label="Cancel"
                 primary={true}
                 onClick={onCancel}
-            />,
-            <RaisedButton className="action-btn"
-                label="Save"
-                primary={true}
-                onClick={onSave}
             />
         ];
 
@@ -28,6 +28,7 @@ class Popup extends React.Component {
                 open={isOpen}
                 onRequestClose={onCancel}
                 contentClassName={popupStyle}
+                paperClassName="popup-paper"
             >
                 {children}
             </Dialog>

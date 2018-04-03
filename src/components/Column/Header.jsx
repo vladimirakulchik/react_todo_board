@@ -3,7 +3,7 @@ import './Header.css';
 
 function Header(props) {
     return(
-        <h3 className="header">
+        <h3 className="column-header">
             {props.title}
         </h3>
     )
