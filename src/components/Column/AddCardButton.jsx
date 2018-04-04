@@ -1,11 +1,15 @@
 import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import Popup from '../Popup/Popup';
+import CardEdit from '../Card/CardEdit';
 import './AddCardButton.css';
 
 class AddCardButton extends React.Component {
     state = {
         open: false,
+        title: "",
+        text: "",
+        color: "white"
     };
 
     togglePopup = () => {
@@ -16,6 +20,24 @@ class AddCardButton extends React.Component {
 
     onSave = () => {
         this.togglePopup();
+    };
+
+    handleTitleChange = (e, value) => {
+        this.setState({
+            title: value
+        });
+    };
+
+    handleTextChange = (e, value) => {
+        this.setState({
+            text: value
+        });
+    };
+
+    handleColorChange = (e, value) => {
+        this.setState({
+            color: value
+        });
     };
 
     render() {
@@ -32,7 +54,14 @@ class AddCardButton extends React.Component {
                     onSave={this.onSave}
                     onCancel={this.togglePopup}
                 >
-                    CardEdit with empty fields
+                    <CardEdit
+                        title={this.state.title}
+                        text={this.state.text}
+                        color={this.state.color}
+                        onTitleChange={this.handleTitleChange}
+                        onTextChange={this.handleTextChange}
+                        onColorChange={this.handleColorChange}
+                    />
                 </Popup>
             </div>
         )
