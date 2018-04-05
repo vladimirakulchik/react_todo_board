@@ -1,4 +1,5 @@
 import React from 'react';
+import ListItem from 'material-ui/List';
 import {Card, CardTitle, CardText} from 'material-ui/Card';
 import CardEditButton from './CardEditButton';
 import './CardDetails.css';
@@ -20,19 +21,21 @@ class CardDetails extends React.Component {
         const {title, text, color} = this.props;
 
         return (
-            <Card className="card-details" style={{backgroundColor: color}}>
-                <CardEditButton
-                    title={title}
-                    text={text}
-                    color={color}
-                />
+            <ListItem className="list-cards-item">
+                <Card className="card-details" style={{backgroundColor: color}}>
+                    <CardEditButton
+                        title={title}
+                        text={text}
+                        color={color}
+                    />
 
-                <CardTitle className="card-title" title={title} />
+                    <CardTitle className="card-title" title={title} />
 
-                <CardText className="card-text">
-                    {CardDetails.truncate(text)}
-                </CardText>
-            </Card>
+                    <CardText className="card-text">
+                        {CardDetails.truncate(text)}
+                    </CardText>
+                </Card>
+            </ListItem>
         );
     }
 }
