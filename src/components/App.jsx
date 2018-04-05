@@ -15,7 +15,7 @@ function App() {
 
                 <div className="content">
                     <div className="board scrollbar">
-                        <Column />
+                        <Column title="List title" />
                     </div>
                 </div>
             </div>

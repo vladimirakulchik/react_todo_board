@@ -5,8 +5,12 @@
 
 .card-details {
     position: relative;
-    padding: 0 !important;
+    padding: 0 4px !important;
     cursor: pointer !important;
+}
+
+.card-details-selected {
+    border: 2px solid #AB149E;
 }
 
 .card-title {

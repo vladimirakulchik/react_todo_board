@@ -17,11 +17,27 @@ class CardDetails extends React.Component {
         return result;
     }
 
+    static addStyle(index) {
+        const className = "card-details-selected";
+        let card = document.getElementsByClassName("card-details")[index];
+        if (card) {
+            card.classList.add(className);
+        }
+    }
+
+    static removeStyle(index) {
+        const className = "card-details-selected";
+        let card = document.getElementsByClassName("card-details")[index];
+        if (card) {
+            card.classList.remove(className);
+        }
+    }
+
     render() {
-        const {title, text, color} = this.props;
+        const {index, onSelect, title, text, color} = this.props;
 
         return (
-            <ListItem className="list-cards-item">
+            <ListItem className="list-cards-item" value={index} onClick={onSelect.bind(this, index)} >
                 <Card className="card-details" style={{backgroundColor: color}}>
                     <CardEditButton
                         title={title}

@@ -11,7 +11,7 @@ class Column extends React.Component {
         return(
             <div className="column">
                 <Paper className="column-content" zDepth={3}>
-                    <Header title="List title" />
+                    <Header title={this.props.title} />
 
                     <ListCards />
 
