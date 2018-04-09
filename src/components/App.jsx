@@ -5,22 +5,59 @@ import Column from './Column/Column';
 import './App.css';
 import './Scrollbar.css';
 
-function App() {
-    return (
-        <MuiThemeProvider>
-            <div className="app">
-                <div className="header">
-                    <AppToolbar />
-                </div>
+class App extends React.Component {
+    state = {
+        data: [],
+        nextListId: 0
+    };
 
-                <div className="content">
-                    <div className="board scrollbar">
-                        <Column title="List title" />
+    componentWillMount() {
+        this.addList("Default");
+    };
+
+    onListAdd = (title) => {
+        this.addList(title);
+    };
+
+    addList(title) {
+        let createdItem = {
+            "id": "",
+            "title": "",
+            "cards": []
+        };
+        createdItem.id = this.state.nextListId;
+        createdItem.title = title;
+        const data = [...this.state.data, createdItem];
+
+        this.setState({
+            data: data,
+            nextListId: this.state.nextListId + 1
+        });
+    };
+
+    render() {
+        return (
+            <MuiThemeProvider>
+                <div className="app">
+                    <div className="header">
+                        <AppToolbar onListAdd={this.onListAdd} />
+                    </div>
+
+                    <div className="content">
+                        <div className="board scrollbar">
+                            {this.state.data.map(column =>
+                                <Column
+                                    key={column.id}
+                                    title={column.title}
+                                    cards={column.cards}
+                                />
+                            )}
+                        </div>
                     </div>
                 </div>
-            </div>
-        </MuiThemeProvider>
-    );
+            </MuiThemeProvider>
+        );
+    }
 }
 
 export default App;

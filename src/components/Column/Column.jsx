@@ -8,12 +8,14 @@ import '../Scrollbar.css';
 
 class Column extends React.Component {
     render() {
+        const {title, cards} = this.props;
+
         return(
             <div className="column">
                 <Paper className="column-content" zDepth={3}>
-                    <Header title={this.props.title} />
+                    <Header title={title} />
 
-                    <ListCards />
+                    <ListCards cards={cards} />
 
                     <AddCardButton />
                 </Paper>

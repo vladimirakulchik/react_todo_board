@@ -18,6 +18,7 @@ class AddListButton extends React.Component {
 
     onSave = () => {
         this.togglePopup();
+        this.props.onListAdd(this.state.title);
     };
 
     handleTitleChange = (e, value) => {

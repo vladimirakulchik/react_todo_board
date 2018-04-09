@@ -18,7 +18,7 @@ class AppToolbar extends React.Component {
                 <ToolbarTitle className="app-toolbar-title" text="TODO Board" />
 
                 <ToolbarGroup lastChild={false} className="app-toolbar-settings">
-                    <AddListButton />
+                    <AddListButton onListAdd={this.props.onListAdd} />
                     <MenuSettings />
                 </ToolbarGroup>
             </Toolbar>

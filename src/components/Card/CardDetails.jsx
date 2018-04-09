@@ -34,10 +34,11 @@ class CardDetails extends React.Component {
     }
 
     render() {
-        const {index, onSelect, title, text, color} = this.props;
+        const {id, title, text, color} = this.props.card;
+        const {onSelect} = this.props;
 
         return (
-            <ListItem className="list-cards-item" value={index} onClick={onSelect.bind(this, index)} >
+            <ListItem className="list-cards-item" value={id} onClick={onSelect.bind(this, id)} >
                 <Card className="card-details" style={{backgroundColor: color}}>
                     <CardEditButton
                         title={title}
