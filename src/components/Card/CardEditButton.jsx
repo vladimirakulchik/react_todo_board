@@ -21,6 +21,11 @@ class CardEditButton extends React.Component {
 
     onSave = () => {
         this.togglePopup();
+        this.props.onCardUpdate({
+            "title": this.state.title,
+            "text": this.state.text,
+            "color": this.state.color
+        });
     };
 
     handleTitleChange = (e, value) => {

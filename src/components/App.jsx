@@ -53,12 +53,36 @@ class App extends React.Component {
         this.setState({
             columnsData: data,
             nextCardId: this.state.nextCardId + 1
-        })
+        });
     };
 
     onCardSelect = (id) => {
         this.setState({
             selectedCardId: (this.state.selectedCardId !== id) ? id : null
+        });
+    };
+
+    onCardUpdate = (updatedCard) => {
+        const data = this.state.columnsData.map(column => {
+            if (column.id === updatedCard.columnId) {
+                column.cards = App.updateCards(column.cards, updatedCard);
+            }
+
+            return column;
+        });
+
+        this.setState({
+            columnsData: data
+        });
+    };
+
+    static updateCards(cards, updatedCard) {
+        return cards.map(card => {
+            if (card.id === updatedCard.id) {
+                return updatedCard;
+            }
+
+            return card;
         });
     };
 
@@ -83,6 +107,7 @@ class App extends React.Component {
                                     onCardAdd={this.onCardAdd}
                                     selectedCardId={this.state.selectedCardId}
                                     onCardSelect={this.onCardSelect}
+                                    onCardUpdate={this.onCardUpdate}
                                 />
                             )}
                         </div>

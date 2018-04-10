@@ -12,6 +12,11 @@ class Column extends React.Component {
         this.props.onCardAdd(card);
     };
 
+    onCardUpdate = (card) => {
+        card.columnId = this.props.columnId;
+        this.props.onCardUpdate(card);
+    };
+
     render() {
         const {title, cards, selectedCardId, onCardSelect} = this.props;
 
@@ -24,6 +29,7 @@ class Column extends React.Component {
                         cards={cards}
                         selectedCardId={selectedCardId}
                         onCardSelect={onCardSelect}
+                        onCardUpdate={this.onCardUpdate}
                     />
 
                     <AddCardButton onCardAdd={this.onCardAdd} />

@@ -5,6 +5,11 @@ import CardEditButton from './CardEditButton';
 import './CardDetails.css';
 
 class CardDetails extends React.Component {
+    onCardUpdate = (card) => {
+        card.id = this.props.card.id;
+        this.props.onCardUpdate(card);
+    };
+
     render() {
         const {id, title, text, color} = this.props.card;
         const {selectedId, onSelect} = this.props;
@@ -22,6 +27,7 @@ class CardDetails extends React.Component {
                         title={title}
                         text={text}
                         color={color}
+                        onCardUpdate={this.onCardUpdate}
                     />
 
                     <CardTitle className="card-title" title={title} />
