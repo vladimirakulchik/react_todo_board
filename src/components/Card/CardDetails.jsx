@@ -5,37 +5,15 @@ import CardEditButton from './CardEditButton';
 import './CardDetails.css';
 
 class CardDetails extends React.Component {
-
-    static truncate(text) {
-        let maxSize = 350;
-        let result = text;
-
-        if ((text) && (text.length > maxSize)) {
-            result = text.substr(0, maxSize) + "...";
-        }
-
-        return result;
-    }
-
-    static addStyle(index) {
-        const className = "card-details-selected";
-        let card = document.getElementsByClassName("card-details")[index];
-        if (card) {
-            card.classList.add(className);
-        }
-    }
-
-    static removeStyle(index) {
-        const className = "card-details-selected";
-        let card = document.getElementsByClassName("card-details")[index];
-        if (card) {
-            card.classList.remove(className);
-        }
-    }
-
     render() {
         const {id, title, text, color} = this.props.card;
-        const {onSelect} = this.props;
+        const {selectedId, onSelect} = this.props;
+
+        if (id === selectedId) {
+            CardDetails.selectCard(id);
+        } else {
+            CardDetails.deselectCard(id);
+        }
 
         return (
             <ListItem className="list-cards-item" value={id} onClick={onSelect.bind(this, id)} >
@@ -54,7 +32,54 @@ class CardDetails extends React.Component {
                 </Card>
             </ListItem>
         );
-    }
+    };
+
+    static truncate(text) {
+        let maxSize = 350;
+        let result = text;
+
+        if ((text) && (text.length > maxSize)) {
+            result = text.substr(0, maxSize) + "...";
+        }
+
+        return result;
+    };
+
+    static selectCard(id) {
+        if (id != null) {
+            CardDetails.addClassStyle(CardDetails.getCard(id));
+        }
+    };
+
+    static deselectCard(id) {
+        if (id != null) {
+            CardDetails.removeClassStyle(CardDetails.getCard(id));
+        }
+    };
+
+    static getCard(id) {
+        let listCards = document.getElementsByClassName("list-cards-item");
+        for (let item of listCards) {
+            if (item.getAttribute("value") === id.toString()) {
+                return item.getElementsByClassName("card-details")[0];
+            }
+        }
+        return null;
+    };
+
+    static className = "card-details-selected";
+
+    static addClassStyle(card) {
+        if (card != null) {
+            card.classList.add(this.className);
+        }
+    };
+
+    static removeClassStyle(card) {
+        if (card != null) {
+            card.classList.remove(this.className);
+        }
+    };
 }
 
 export default CardDetails;

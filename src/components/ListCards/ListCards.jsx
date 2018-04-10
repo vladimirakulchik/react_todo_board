@@ -5,36 +5,19 @@ import './ListCards.css';
 import '../Scrollbar.css';
 
 class ListCards extends React.Component {
-    state = {
-        selectedIndex: null
-    };
-
-    handleSelect = (index) => {
-        CardDetails.removeStyle(this.state.selectedIndex);
-
-        if (this.state.selectedIndex === index) {
-            this.setState({
-                selectedIndex: null
-            });
-        } else {
-            CardDetails.addStyle(index);
-            this.setState({
-                selectedIndex: index
-            });
-        }
-    };
-
     render() {
-        const {cards} = this.props;
+        const {cards, selectedCardId, onCardSelect} = this.props;
 
         return (
             <List className="list-cards scrollbar">
                 {
                     cards.map(card =>
                         <CardDetails
+                            id={card.id}
                             key={card.id}
                             card={card}
-                            onSelect={this.handleSelect}
+                            selectedId={selectedCardId}
+                            onSelect={onCardSelect}
                         />
                     )
                 }

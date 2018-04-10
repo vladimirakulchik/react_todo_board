@@ -9,7 +9,8 @@ class App extends React.Component {
     state = {
         columnsData: [],
         nextColumnId: 0,
-        nextCardId: 0
+        nextCardId: 0,
+        selectedCardId: null
     };
 
     componentWillMount() {
@@ -55,6 +56,12 @@ class App extends React.Component {
         })
     };
 
+    onCardSelect = (id) => {
+        this.setState({
+            selectedCardId: (this.state.selectedCardId !== id) ? id : null
+        });
+    };
+
     render() {
         return (
             <MuiThemeProvider>
@@ -74,6 +81,8 @@ class App extends React.Component {
                                     title={column.title}
                                     cards={column.cards}
                                     onCardAdd={this.onCardAdd}
+                                    selectedCardId={this.state.selectedCardId}
+                                    onCardSelect={this.onCardSelect}
                                 />
                             )}
                         </div>

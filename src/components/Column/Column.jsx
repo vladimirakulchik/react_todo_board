@@ -13,14 +13,18 @@ class Column extends React.Component {
     };
 
     render() {
-        const {title, cards} = this.props;
+        const {title, cards, selectedCardId, onCardSelect} = this.props;
 
         return(
             <div className="column">
                 <Paper className="column-content" zDepth={3}>
                     <Header title={title} />
 
-                    <ListCards cards={cards} />
+                    <ListCards
+                        cards={cards}
+                        selectedCardId={selectedCardId}
+                        onCardSelect={onCardSelect}
+                    />
 
                     <AddCardButton onCardAdd={this.onCardAdd} />
                 </Paper>
