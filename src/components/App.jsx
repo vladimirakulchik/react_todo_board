@@ -7,32 +7,52 @@ import './Scrollbar.css';
 
 class App extends React.Component {
     state = {
-        data: [],
-        nextListId: 0
+        columnsData: [],
+        nextColumnId: 0,
+        nextCardId: 0
     };
 
     componentWillMount() {
-        this.addList("Default");
+        this.addColumn("Default");
     };
 
-    onListAdd = (title) => {
-        this.addList(title);
+    onColumnAdd = (title) => {
+        this.addColumn(title);
     };
 
-    addList(title) {
-        let createdItem = {
+    addColumn(title) {
+        let newColumn = {
             "id": "",
             "title": "",
             "cards": []
         };
-        createdItem.id = this.state.nextListId;
-        createdItem.title = title;
-        const data = [...this.state.data, createdItem];
+        newColumn.id = this.state.nextColumnId;
+        newColumn.title = title;
 
         this.setState({
-            data: data,
-            nextListId: this.state.nextListId + 1
+            columnsData: [...this.state.columnsData, newColumn],
+            nextColumnId: this.state.nextColumnId + 1
         });
+    };
+
+    onCardAdd = (card) => {
+        card.id = this.state.nextCardId;
+        this.addCard(card);
+    };
+
+    addCard(newCard) {
+        const data = this.state.columnsData.map(column => {
+            if (column.id === newCard.columnId) {
+                column.cards = [...column.cards, newCard];
+            }
+
+            return column;
+        });
+
+        this.setState({
+            columnsData: data,
+            nextCardId: this.state.nextCardId + 1
+        })
     };
 
     render() {
@@ -40,16 +60,20 @@ class App extends React.Component {
             <MuiThemeProvider>
                 <div className="app">
                     <div className="header">
-                        <AppToolbar onListAdd={this.onListAdd} />
+                        <AppToolbar
+                            onColumnAdd={this.onColumnAdd}
+                        />
                     </div>
 
                     <div className="content">
                         <div className="board scrollbar">
-                            {this.state.data.map(column =>
+                            {this.state.columnsData.map(column =>
                                 <Column
                                     key={column.id}
+                                    columnId={column.id}
                                     title={column.title}
                                     cards={column.cards}
+                                    onCardAdd={this.onCardAdd}
                                 />
                             )}
                         </div>

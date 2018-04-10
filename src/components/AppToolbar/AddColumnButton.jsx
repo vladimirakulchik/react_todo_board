@@ -2,9 +2,9 @@ import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import Popup from '../Popup/Popup';
-import './AddListButton.css';
+import './AddColumnButton.css';
 
-class AddListButton extends React.Component {
+class AddColumnButton extends React.Component {
     state = {
         open: false,
         title: ""
@@ -18,7 +18,7 @@ class AddListButton extends React.Component {
 
     onSave = () => {
         this.togglePopup();
-        this.props.onListAdd(this.state.title);
+        this.props.onColumnAdd(this.state.title);
     };
 
     handleTitleChange = (e, value) => {
@@ -59,4 +59,4 @@ class AddListButton extends React.Component {
     }
 }
 
-export default AddListButton;
+export default AddColumnButton;

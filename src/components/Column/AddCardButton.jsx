@@ -14,12 +14,20 @@ class AddCardButton extends React.Component {
 
     togglePopup = () => {
         this.setState({
-            open: !this.state.open
+            open: !this.state.open,
+            title: "",
+            text: "",
+            color: "white"
         });
     };
 
     onSave = () => {
         this.togglePopup();
+        this.props.onCardAdd({
+            "title": this.state.title,
+            "text": this.state.text,
+            "color": this.state.color
+        });
     };
 
     handleTitleChange = (e, value) => {

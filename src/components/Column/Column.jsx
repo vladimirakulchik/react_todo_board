@@ -7,6 +7,11 @@ import './Column.css';
 import '../Scrollbar.css';
 
 class Column extends React.Component {
+    onCardAdd = (card) => {
+        card.columnId = this.props.columnId;
+        this.props.onCardAdd(card);
+    };
+
     render() {
         const {title, cards} = this.props;
 
@@ -17,7 +22,7 @@ class Column extends React.Component {
 
                     <ListCards cards={cards} />
 
-                    <AddCardButton />
+                    <AddCardButton onCardAdd={this.onCardAdd} />
                 </Paper>
             </div>
         );

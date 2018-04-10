@@ -32,6 +32,7 @@ class ListCards extends React.Component {
                 {
                     cards.map(card =>
                         <CardDetails
+                            key={card.id}
                             card={card}
                             onSelect={this.handleSelect}
                         />
