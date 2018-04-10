@@ -30,7 +30,7 @@ class CardDetails extends React.Component {
                         onCardUpdate={this.onCardUpdate}
                     />
 
-                    <CardTitle className="card-title" title={title} />
+                    <CardTitle className="card-title" title={CardDetails.truncate(title, 15)} />
 
                     <CardText className="card-text">
                         {CardDetails.truncate(text)}
@@ -40,8 +40,8 @@ class CardDetails extends React.Component {
         );
     };
 
-    static truncate(text) {
-        let maxSize = 350;
+    static truncate(text, size) {
+        let maxSize = (size != null) ? size : 350;
         let result = text;
 
         if ((text) && (text.length > maxSize)) {
