@@ -6,19 +6,20 @@ import '../Scrollbar.css';
 
 class ListCards extends React.Component {
     render() {
-        const {cards, selectedCardId, onCardSelect, onCardUpdate} = this.props;
+        const {cards, selectedCardId, onCardSelect, onCardUpdate, onCardDelete} = this.props;
 
         return (
             <List className="list-cards scrollbar">
                 {
                     cards.map(card =>
                         <CardDetails
-                            id={card.id}
                             key={card.id}
+                            id={card.id}
                             card={card}
                             selectedId={selectedCardId}
                             onSelect={onCardSelect}
                             onCardUpdate={onCardUpdate}
+                            onCardDelete={onCardDelete}
                         />
                     )
                 }

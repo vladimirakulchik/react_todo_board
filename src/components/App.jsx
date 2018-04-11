@@ -86,6 +86,20 @@ class App extends React.Component {
         });
     };
 
+    onCardDelete = (deletedCard) => {
+        const data = this.state.columnsData.map(column => {
+            if (column.id === deletedCard.columnId) {
+                column.cards = column.cards.filter(item => item.id !== deletedCard.id)
+            }
+
+            return column;
+        });
+
+        this.setState({
+            columnsData: data
+        });
+    };
+
     render() {
         return (
             <MuiThemeProvider>
@@ -108,6 +122,7 @@ class App extends React.Component {
                                     selectedCardId={this.state.selectedCardId}
                                     onCardSelect={this.onCardSelect}
                                     onCardUpdate={this.onCardUpdate}
+                                    onCardDelete={this.onCardDelete}
                                 />
                             )}
                         </div>

@@ -2,6 +2,12 @@
     margin: 8px !important;
 }
 
+.action-btn-delete {
+    position: absolute !important;
+    left: 8px !important;
+    margin: 8px !important;
+}
+
 .popup-paper {
     background-color: snow !important;
 }

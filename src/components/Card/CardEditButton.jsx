@@ -28,6 +28,11 @@ class CardEditButton extends React.Component {
         });
     };
 
+    onDelete = () => {
+        this.togglePopup();
+        this.props.onCardDelete({});
+    };
+
     handleTitleChange = (e, value) => {
         this.setState({
             title: value
@@ -56,9 +61,11 @@ class CardEditButton extends React.Component {
                 <Popup
                     popupStyle="card-edit-popup"
                     title="Edit card"
+                    isDelete={true}
                     isOpen={this.state.open}
                     onSave={this.onSave}
                     onCancel={this.togglePopup}
+                    onDelete={this.onDelete}
                 >
                     <CardEdit
                         title={this.state.title}

@@ -58,6 +58,7 @@ class AddCardButton extends React.Component {
                 <Popup
                     popupStyle="add-card-popup"
                     title="Add a card"
+                    isDelete={false}
                     isOpen={this.state.open}
                     onSave={this.onSave}
                     onCancel={this.togglePopup}

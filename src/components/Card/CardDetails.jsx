@@ -10,6 +10,11 @@ class CardDetails extends React.Component {
         this.props.onCardUpdate(card);
     };
 
+    onCardDelete = (card) => {
+        card.id = this.props.card.id;
+        this.props.onCardDelete(card);
+    };
+
     render() {
         const {id, title, text, color} = this.props.card;
         const {selectedId, onSelect} = this.props;
@@ -28,6 +33,7 @@ class CardDetails extends React.Component {
                         text={text}
                         color={color}
                         onCardUpdate={this.onCardUpdate}
+                        onCardDelete={this.onCardDelete}
                     />
 
                     <CardTitle className="card-title" title={CardDetails.truncate(title, 15)} />
