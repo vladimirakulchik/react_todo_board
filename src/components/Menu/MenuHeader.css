@@ -1,0 +1,24 @@
+.menu-header {
+    flex: 0 0 auto;
+    position: relative;
+    height: 50px;
+    padding: 0 12px;
+}
+
+.menu-header-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.menu-header-title {
+    flex: 1;
+    text-align: center;
+    line-height: 24px;
+    margin: 13px 10px 13px 30px;
+}
+
+.menu-close {
+    position: absolute;
+    top: 0;
+    right: 6px;
+}

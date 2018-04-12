@@ -2,6 +2,7 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppToolbar from './AppToolbar/AppToolbar';
 import Column from './Column/Column';
+import OptionalMenu from "./Menu/OptionalMenu";
 import './App.css';
 import './Scrollbar.css';
 
@@ -10,7 +11,9 @@ class App extends React.Component {
         columnsData: [],
         nextColumnId: 0,
         nextCardId: 0,
-        selectedCardId: null
+        selectedCardId: null,
+        bgColor: "#43A047",
+        bgImage: "none"
     };
 
     componentWillMount() {
@@ -100,6 +103,16 @@ class App extends React.Component {
         });
     };
 
+    onBackgroundChange = (background) => {
+        document.getElementById("root").style.backgroundColor = background.color;
+        document.getElementById("root").style.backgroundImage = background.photo;
+
+        this.setState({
+            bgColor: background.color,
+            bgImage: background.photo
+        })
+    };
+
     render() {
         return (
             <MuiThemeProvider>
@@ -125,6 +138,12 @@ class App extends React.Component {
                                     onCardDelete={this.onCardDelete}
                                 />
                             )}
+                        </div>
+
+                        <div className="menu">
+                            <OptionalMenu
+                                onChange={this.onBackgroundChange}
+                            />
                         </div>
                     </div>
                 </div>

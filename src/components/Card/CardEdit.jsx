@@ -6,10 +6,10 @@ import ColorUnchecked from 'material-ui/svg-icons/image/brightness-1';
 import './CardEdit.css';
 
 class CardEdit extends React.Component {
-    RED_COLOR = "#FAD0C3";
+    RED_COLOR = "#FAC3D2";
     WHITE_COLOR = "white";
-    GREEN_COLOR = "#C1E1C5";
-    BLUE_COLOR = "#C5CAE9";
+    GREEN_COLOR = "#ABF8BD";
+    BLUE_COLOR = "#ABE6F8";
 
     render() {
         const {title, text, color, onTitleChange, onTextChange, onColorChange} = this.props;

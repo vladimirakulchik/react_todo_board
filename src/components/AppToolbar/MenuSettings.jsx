@@ -6,6 +6,12 @@ import ActionSettings from 'material-ui/svg-icons/action/settings';
 import './Buttons.css';
 
 class MenuSettings extends React.Component {
+    showMenu = () => {
+        document.getElementsByClassName("menu")[0].style.display = "block";
+        let menuWidth = document.getElementsByClassName("menu")[0].offsetWidth;
+        document.getElementsByClassName("board")[0].style.marginRight = menuWidth + "px";
+    };
+
     render() {
         return (
             <IconMenu
@@ -17,7 +23,10 @@ class MenuSettings extends React.Component {
                 anchorOrigin={{horizontal: 'right', vertical: 'top'}}
                 targetOrigin={{horizontal: 'right', vertical: 'top'}}
             >
-                <MenuItem primaryText="Change background" />
+                <MenuItem
+                    primaryText="Change background"
+                    onClick={this.showMenu}
+                />
             </IconMenu>
         );
     }
