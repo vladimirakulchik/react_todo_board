@@ -7,30 +7,19 @@ import './CardEditButton.css';
 
 class CardEditButton extends React.Component {
     state = {
-        open: false,
         title: this.props.title,
         text: this.props.text,
         color: this.props.color
     };
 
-    togglePopup = () => {
-        this.setState({
-            open: !this.state.open
-        });
-    };
-
-    onSave = () => {
-        this.togglePopup();
-        this.props.onCardUpdate({
-            "title": this.state.title,
-            "text": this.state.text,
-            "color": this.state.color
-        });
-    };
-
-    onDelete = () => {
-        this.togglePopup();
-        this.props.onCardDelete({});
+    componentWillReceiveProps(nextProps) {
+        if (nextProps !== this.props) {
+            this.setState({
+                title: nextProps.title,
+                text: nextProps.text,
+                color: nextProps.color
+            });
+        }
     };
 
     handleTitleChange = (e, value) => {
@@ -51,10 +40,20 @@ class CardEditButton extends React.Component {
         });
     };
 
+    onSave = () => {
+        this.props.onCardUpdate({
+            "title": this.state.title,
+            "text": this.state.text,
+            "color": this.state.color
+        });
+    };
+
     render() {
+        const {isOpen, onCardEdit, onCardEditCancel, onCardDelete} = this.props;
+
         return(
             <div>
-                <IconButton className="card-edit-btn" onClick={this.togglePopup}>
+                <IconButton className="card-edit-btn" onClick={onCardEdit}>
                     <ModeEdit />
                 </IconButton>
 
@@ -62,10 +61,10 @@ class CardEditButton extends React.Component {
                     popupStyle="card-edit-popup"
                     title="Edit card"
                     isDelete={true}
-                    isOpen={this.state.open}
+                    isOpen={isOpen}
                     onSave={this.onSave}
-                    onCancel={this.togglePopup}
-                    onDelete={this.onDelete}
+                    onCancel={onCardEditCancel}
+                    onDelete={onCardDelete}
                 >
                     <CardEdit
                         title={this.state.title}

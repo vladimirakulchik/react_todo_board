@@ -17,7 +17,7 @@ class CardDetails extends React.Component {
 
     render() {
         const {id, title, text, color} = this.props.card;
-        const {selectedId, onSelect} = this.props;
+        const {selectedId, onCardSelect, isEditPopupOpen, onCardEdit, onCardEditCancel} = this.props;
 
         if (id === selectedId) {
             CardDetails.selectCard(id);
@@ -25,13 +25,18 @@ class CardDetails extends React.Component {
             CardDetails.deselectCard(id);
         }
 
+        let isOpen = ((id === selectedId) && isEditPopupOpen);
+
         return (
-            <ListItem className="list-cards-item" value={id} onClick={onSelect.bind(this, id)} >
+            <ListItem className="list-cards-item" value={id} onClick={onCardSelect.bind(this, id)} >
                 <Card className="card-details" style={{backgroundColor: color}}>
                     <CardEditButton
                         title={title}
                         text={text}
                         color={color}
+                        isOpen={isOpen}
+                        onCardEdit={onCardEdit.bind(this, id)}
+                        onCardEditCancel={onCardEditCancel}
                         onCardUpdate={this.onCardUpdate}
                         onCardDelete={this.onCardDelete}
                     />

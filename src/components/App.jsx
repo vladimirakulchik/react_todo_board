@@ -8,16 +8,28 @@ import './Scrollbar.css';
 
 class App extends React.Component {
     state = {
+        bgColor: "#43A047",
+        bgImage: "none",
         columnsData: [],
         nextColumnId: 0,
         nextCardId: 0,
         selectedCardId: null,
-        bgColor: "#43A047",
-        bgImage: "none"
+        isEditPopupOpen: false
     };
 
     componentWillMount() {
         this.addColumn("Default");
+        document.getElementsByTagName('body')[0].addEventListener("keydown", this.onKeyDown);
+    };
+
+    onBackgroundChange = (background) => {
+        document.getElementById("root").style.backgroundColor = background.color;
+        document.getElementById("root").style.backgroundImage = background.photo;
+
+        this.setState({
+            bgColor: background.color,
+            bgImage: background.photo
+        })
     };
 
     onColumnAdd = (title) => {
@@ -40,6 +52,7 @@ class App extends React.Component {
     };
 
     onCardAdd = (card) => {
+        this.closeEditPopup();
         card.id = this.state.nextCardId;
         this.addCard(card);
     };
@@ -59,13 +72,8 @@ class App extends React.Component {
         });
     };
 
-    onCardSelect = (id) => {
-        this.setState({
-            selectedCardId: (this.state.selectedCardId !== id) ? id : null
-        });
-    };
-
     onCardUpdate = (updatedCard) => {
+        this.closeEditPopup();
         const data = this.state.columnsData.map(column => {
             if (column.id === updatedCard.columnId) {
                 column.cards = App.updateCards(column.cards, updatedCard);
@@ -90,6 +98,7 @@ class App extends React.Component {
     };
 
     onCardDelete = (deletedCard) => {
+        this.closeEditPopup();
         const data = this.state.columnsData.map(column => {
             if (column.id === deletedCard.columnId) {
                 column.cards = column.cards.filter(item => item.id !== deletedCard.id)
@@ -103,14 +112,78 @@ class App extends React.Component {
         });
     };
 
-    onBackgroundChange = (background) => {
-        document.getElementById("root").style.backgroundColor = background.color;
-        document.getElementById("root").style.backgroundImage = background.photo;
+    onCardSelect = (id) => {
+        this.selectCard(id);
+    };
 
+    onCardEdit = (id) => {
+        this.selectCard(id);
+        this.openEditPopup();
+    };
+
+    onCardEditCancel = () => {
+        this.closeEditPopup();
+        this.deselectCard();
+    };
+
+    selectCard(id) {
         this.setState({
-            bgColor: background.color,
-            bgImage: background.photo
-        })
+            selectedCardId: id
+        });
+    };
+
+    deselectCard() {
+        this.setState({
+            selectedCardId: null
+        });
+    };
+
+    openEditPopup() {
+        this.setState({
+            isEditPopupOpen: true
+        });
+    };
+
+    closeEditPopup() {
+        this.setState({
+            isEditPopupOpen: false
+        });
+    };
+
+    handleEnterKey() {
+        if (this.state.selectedCardId != null) {
+            this.openEditPopup();
+        }
+    };
+
+    onKeyDown = (e) => {
+        if ((this.state.selectedCardId !== null) && !this.state.isEditPopupOpen) {
+
+            switch (e.key) {
+                case "Enter":
+                    this.handleEnterKey();
+                    break;
+
+                case "ArrowUp":
+                    alert("up");
+                    break;
+
+                case "ArrowDown":
+                    alert("down");
+                    break;
+
+                case "ArrowLeft":
+                    alert("left");
+                    break;
+
+                case "ArrowRight":
+                    alert("right");
+                    break;
+
+                default:
+                    break;
+            }
+        }
     };
 
     render() {
@@ -132,8 +205,14 @@ class App extends React.Component {
                                     title={column.title}
                                     cards={column.cards}
                                     onCardAdd={this.onCardAdd}
+
                                     selectedCardId={this.state.selectedCardId}
                                     onCardSelect={this.onCardSelect}
+
+                                    isEditPopupOpen={this.state.isEditPopupOpen}
+                                    onCardEdit={this.onCardEdit}
+                                    onCardEditCancel={this.onCardEditCancel}
+
                                     onCardUpdate={this.onCardUpdate}
                                     onCardDelete={this.onCardDelete}
                                 />

@@ -7,7 +7,7 @@
     position: relative;
     padding: 0 4px !important;
     cursor: pointer !important;
-    min-height: 45px !important;
+    min-height: 50px !important;
 }
 
 .card-details-selected {

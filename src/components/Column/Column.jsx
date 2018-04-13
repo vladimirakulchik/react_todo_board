@@ -23,7 +23,13 @@ class Column extends React.Component {
     };
 
     render() {
-        const {title, cards, selectedCardId, onCardSelect} = this.props;
+        const {
+            title,
+            cards,
+            selectedCardId, onCardSelect,
+            isEditPopupOpen,
+            onCardEdit, onCardEditCancel
+        } = this.props;
 
         return(
             <div className="column">
@@ -32,8 +38,14 @@ class Column extends React.Component {
 
                     <ListCards
                         cards={cards}
+
                         selectedCardId={selectedCardId}
                         onCardSelect={onCardSelect}
+
+                        isEditPopupOpen={isEditPopupOpen}
+                        onCardEdit={onCardEdit}
+                        onCardEditCancel={onCardEditCancel}
+
                         onCardUpdate={this.onCardUpdate}
                         onCardDelete={this.onCardDelete}
                     />
