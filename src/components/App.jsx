@@ -55,6 +55,9 @@ class App extends React.Component {
         this.closeEditPopup();
         card.id = this.state.nextCardId;
         this.addCard(card);
+        this.setState({
+            nextCardId: this.state.nextCardId + 1
+        });
     };
 
     addCard(newCard) {
@@ -67,8 +70,7 @@ class App extends React.Component {
         });
 
         this.setState({
-            columnsData: data,
-            nextCardId: this.state.nextCardId + 1
+            columnsData: data
         });
     };
 
@@ -123,7 +125,6 @@ class App extends React.Component {
 
     onCardEditCancel = () => {
         this.closeEditPopup();
-        this.deselectCard();
     };
 
     selectCard(id) {
@@ -148,6 +149,7 @@ class App extends React.Component {
         this.setState({
             isEditPopupOpen: false
         });
+        this.deselectCard();
     };
 
     handleEnterKey() {
@@ -156,6 +158,44 @@ class App extends React.Component {
         }
     };
 
+    moveCardUp() {
+        let id = this.state.selectedCardId;
+        let columns = this.state.columnsData;
+
+        let column = columns.find(column =>
+            column.cards.findIndex(card => card.id === id) !== -1
+        );
+
+        let from = column.cards.findIndex(card => card.id === id);
+        let to = from - 1;
+
+        if (to >= 0) {
+            column.cards.splice(to, 0, column.cards.splice(from, 1)[0]);
+            this.setState({
+                columnsData: columns
+            });
+        }
+    };
+
+    moveCardDown() {
+        let id = this.state.selectedCardId;
+        let columns = this.state.columnsData;
+
+        let column = columns.find(column =>
+            column.cards.findIndex(card => card.id === id) !== -1
+        );
+
+        let from = column.cards.findIndex(card => card.id === id);
+        let to = from + 1;
+
+        if (to < column.cards.length) {
+            column.cards.splice(to, 0, column.cards.splice(from, 1)[0]);
+            this.setState({
+                columnsData: columns
+            });
+        }
+    };
+    
     onKeyDown = (e) => {
         if ((this.state.selectedCardId !== null) && !this.state.isEditPopupOpen) {
 
@@ -165,11 +205,11 @@ class App extends React.Component {
                     break;
 
                 case "ArrowUp":
-                    alert("up");
+                    this.moveCardUp();
                     break;
 
                 case "ArrowDown":
-                    alert("down");
+                    this.moveCardDown();
                     break;
 
                 case "ArrowLeft":
