@@ -19,17 +19,11 @@ class CardDetails extends React.Component {
         const {id, title, text, color} = this.props.card;
         const {selectedId, onCardSelect, isEditPopupOpen, onCardEdit, onCardEditCancel} = this.props;
 
-        if (id === selectedId) {
-            CardDetails.selectCard(id);
-        } else {
-            CardDetails.deselectCard(id);
-        }
-
         let isOpen = ((id === selectedId) && isEditPopupOpen);
 
         return (
-            <ListItem className="list-cards-item" value={id} onClick={onCardSelect.bind(this, id)} >
-                <Card className="card-details" style={{backgroundColor: color}}>
+            <ListItem className="list-cards-item" onClick={onCardSelect.bind(this, id)} >
+                <Card className="card-details" value={id} tabIndex={-1} style={{backgroundColor: color}}>
                     <CardEditButton
                         title={title}
                         text={text}
@@ -60,42 +54,6 @@ class CardDetails extends React.Component {
         }
 
         return result;
-    };
-
-    static selectCard(id) {
-        if (id != null) {
-            CardDetails.addClassStyle(CardDetails.getCard(id));
-        }
-    };
-
-    static deselectCard(id) {
-        if (id != null) {
-            CardDetails.removeClassStyle(CardDetails.getCard(id));
-        }
-    };
-
-    static getCard(id) {
-        let listCards = document.getElementsByClassName("list-cards-item");
-        for (let item of listCards) {
-            if (item.getAttribute("value") === id.toString()) {
-                return item.getElementsByClassName("card-details")[0];
-            }
-        }
-        return null;
-    };
-
-    static className = "card-details-selected";
-
-    static addClassStyle(card) {
-        if (card != null) {
-            card.classList.add(this.className);
-        }
-    };
-
-    static removeClassStyle(card) {
-        if (card != null) {
-            card.classList.remove(this.className);
-        }
     };
 }
 

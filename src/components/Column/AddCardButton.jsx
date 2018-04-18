@@ -51,7 +51,7 @@ class AddCardButton extends React.Component {
     render() {
         return(
             <div className="add-card">
-                <FlatButton className="add-card-btn" onClick={this.togglePopup}>
+                <FlatButton className="add-card-btn" tabIndex={-1} onClick={this.togglePopup}>
                     Add a card
                 </FlatButton>
 

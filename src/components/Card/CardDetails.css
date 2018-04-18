@@ -10,8 +10,8 @@
     min-height: 50px !important;
 }
 
-.card-details-selected {
-    border: 2px solid #AB149E;
+.card-details:focus {
+    border: 3px solid #6D14AB !important;
 }
 
 .card-title {

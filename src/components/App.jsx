@@ -20,6 +20,7 @@ class App extends React.Component {
     componentWillMount() {
         this.addColumn("Default");
         document.getElementsByTagName('body')[0].addEventListener("keydown", this.onKeyDown);
+        document.getElementsByTagName('body')[0].addEventListener("mousedown", this.onMouseDown);
     };
 
     onBackgroundChange = (background) => {
@@ -244,9 +245,23 @@ class App extends React.Component {
         }
     };
 
-    onKeyDown = (e) => {
-        if ((this.state.selectedCardId !== null) && !this.state.isEditPopupOpen) {
+    static setCardFocus(id) {
+        let cards = document.getElementsByClassName("card-details");
 
+        for (let item of cards) {
+            if (item.getAttribute("value") === id.toString()) {
+                item.focus();
+            }
+        }
+    };
+
+    isKeyBoardAllowed() {
+        return ((this.state.selectedCardId !== null) &&
+            !this.state.isEditPopupOpen);
+    };
+
+    onKeyDown = (e) => {
+        if (this.isKeyBoardAllowed()) {
             switch (e.key) {
                 case "Enter":
                     this.handleEnterKey();
@@ -262,14 +277,34 @@ class App extends React.Component {
 
                 case "ArrowLeft":
                     this.moveCardLeft();
+                    App.setCardFocus(this.state.selectedCardId);
                     break;
 
                 case "ArrowRight":
                     this.moveCardRight();
+                    App.setCardFocus(this.state.selectedCardId);
                     break;
 
                 default:
                     break;
+            }
+        }
+    };
+
+    onMouseDown = (e) => {
+        if (this.state.selectedCardId != null) {
+            let names = e.path.map(element => {
+                return element.className;
+            });
+
+            let index = names.findIndex(name =>
+                (name != null)
+                    ? name.toString() === "card-details"
+                    : false
+            );
+
+            if ((index === -1) && !this.state.isEditPopupOpen) {
+                this.deselectCard();
             }
         }
     };
