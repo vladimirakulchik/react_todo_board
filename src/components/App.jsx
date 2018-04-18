@@ -195,7 +195,55 @@ class App extends React.Component {
             });
         }
     };
-    
+
+    moveCardLeft() {
+        let id = this.state.selectedCardId;
+        let columns = this.state.columnsData;
+
+        let from = columns.findIndex(column =>
+            column.cards.find(card => card.id === id) !== undefined
+        );
+        let to = from - 1;
+
+        if (to >= 0) {
+            let columnFrom = columns[from];
+            let columnTo = columns[to];
+            let cardIndex = columnFrom.cards.findIndex(card => card.id === id);
+
+            let movedCard = columnFrom.cards.splice(cardIndex, 1)[0];
+            movedCard.columnId = to;
+            columnTo.cards = [...columnTo.cards, movedCard];
+
+            this.setState({
+                columnsData: columns
+            });
+        }
+    };
+
+    moveCardRight() {
+        let id = this.state.selectedCardId;
+        let columns = this.state.columnsData;
+
+        let from = columns.findIndex(column =>
+            column.cards.find(card => card.id === id) !== undefined
+        );
+        let to = from + 1;
+
+        if (to < columns.length) {
+            let columnFrom = columns[from];
+            let columnTo = columns[to];
+            let cardIndex = columnFrom.cards.findIndex(card => card.id === id);
+
+            let movedCard = columnFrom.cards.splice(cardIndex, 1)[0];
+            movedCard.columnId = to;
+            columnTo.cards = [...columnTo.cards, movedCard];
+
+            this.setState({
+                columnsData: columns
+            });
+        }
+    };
+
     onKeyDown = (e) => {
         if ((this.state.selectedCardId !== null) && !this.state.isEditPopupOpen) {
 
@@ -213,11 +261,11 @@ class App extends React.Component {
                     break;
 
                 case "ArrowLeft":
-                    alert("left");
+                    this.moveCardLeft();
                     break;
 
                 case "ArrowRight":
-                    alert("right");
+                    this.moveCardRight();
                     break;
 
                 default:
