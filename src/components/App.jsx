@@ -8,8 +8,6 @@ import './Scrollbar.css';
 
 class App extends React.Component {
     state = {
-        bgColor: "#43A047",
-        bgImage: "none",
         columnsData: [],
         nextColumnId: 0,
         nextCardId: 0,
@@ -23,14 +21,9 @@ class App extends React.Component {
         document.getElementsByTagName('body')[0].addEventListener("mousedown", this.onMouseDown);
     };
 
-    onBackgroundChange = (background) => {
-        document.getElementById("root").style.backgroundColor = background.color;
-        document.getElementById("root").style.backgroundImage = background.photo;
-
-        this.setState({
-            bgColor: background.color,
-            bgImage: background.photo
-        })
+    static setAppBackground(background) {
+        document.getElementById("root").style.backgroundColor = background.bgColor;
+        document.getElementById("root").style.backgroundImage = background.bgImage;
     };
 
     onColumnAdd = (title) => {
@@ -310,6 +303,10 @@ class App extends React.Component {
     };
 
     render() {
+        const {background, onBackgroundChange} = this.props;
+
+        App.setAppBackground(background);
+
         return (
             <MuiThemeProvider>
                 <div className="app">
@@ -344,7 +341,7 @@ class App extends React.Component {
 
                         <div className="menu">
                             <OptionalMenu
-                                onChange={this.onBackgroundChange}
+                                onChange={onBackgroundChange}
                             />
                         </div>
                     </div>

@@ -3,14 +3,10 @@ import TextField from 'material-ui/TextField';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import ColorChecked from 'material-ui/svg-icons/toggle/radio-button-checked';
 import ColorUnchecked from 'material-ui/svg-icons/image/brightness-1';
+import * as colors from '../../constants/CardColors';
 import './CardEdit.css';
 
 class CardEdit extends React.Component {
-    RED_COLOR = "#FAC3D2";
-    WHITE_COLOR = "white";
-    GREEN_COLOR = "#ABF8BD";
-    BLUE_COLOR = "#ABE6F8";
-
     render() {
         const {title, text, color, onTitleChange, onTextChange, onColorChange} = this.props;
 
@@ -42,29 +38,29 @@ class CardEdit extends React.Component {
                 >
                     <RadioButton
                         className="card-edit-color"
-                        value={this.RED_COLOR}
-                        label="Red"
-                        checkedIcon={<ColorChecked style={{fill: this.RED_COLOR}} />}
-                        uncheckedIcon={<ColorUnchecked style={{fill: this.RED_COLOR}} />}
+                        value={colors.RED}
+                        label={colors.RED_LABEL}
+                        checkedIcon={<ColorChecked style={{fill: colors.RED}} />}
+                        uncheckedIcon={<ColorUnchecked style={{fill: colors.RED}} />}
                     />
                     <RadioButton
                         className="card-edit-color"
-                        value={this.WHITE_COLOR}
-                        label="White"
+                        value={colors.WHITE}
+                        label={colors.WHITE_LABEL}
                     />
                     <RadioButton
                         className="card-edit-color"
-                        value={this.GREEN_COLOR}
-                        label="Green"
-                        checkedIcon={<ColorChecked style={{fill: this.GREEN_COLOR}} />}
-                        uncheckedIcon={<ColorUnchecked style={{fill: this.GREEN_COLOR}} />}
+                        value={colors.GREEN}
+                        label={colors.GREEN_LABEL}
+                        checkedIcon={<ColorChecked style={{fill: colors.GREEN}} />}
+                        uncheckedIcon={<ColorUnchecked style={{fill: colors.GREEN}} />}
                     />
                     <RadioButton
                         className="card-edit-color"
-                        value={this.BLUE_COLOR}
-                        label="Blue"
-                        checkedIcon={<ColorChecked style={{fill: this.BLUE_COLOR}} />}
-                        uncheckedIcon={<ColorUnchecked style={{fill: this.BLUE_COLOR}} />}
+                        value={colors.BLUE}
+                        label={colors.BLUE_LABEL}
+                        checkedIcon={<ColorChecked style={{fill: colors.BLUE}} />}
+                        uncheckedIcon={<ColorUnchecked style={{fill: colors.BLUE}} />}
                     />
                 </RadioButtonGroup>
             </div>
