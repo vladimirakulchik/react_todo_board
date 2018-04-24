@@ -7,16 +7,7 @@ import './App.css';
 import './Scrollbar.css';
 
 class App extends React.Component {
-    state = {
-        columnsData: [],
-        nextColumnId: 0,
-        nextCardId: 0,
-        selectedCardId: null,
-        isEditPopupOpen: false
-    };
-
     componentWillMount() {
-        this.addColumn("Default");
         document.getElementsByTagName('body')[0].addEventListener("keydown", this.onKeyDown);
         document.getElementsByTagName('body')[0].addEventListener("mousedown", this.onMouseDown);
     };
@@ -26,215 +17,31 @@ class App extends React.Component {
         document.getElementById("root").style.backgroundImage = background.bgImage;
     };
 
-    onColumnAdd = (title) => {
-        this.addColumn(title);
-    };
-
-    addColumn(title) {
-        let newColumn = {
-            "id": "",
-            "title": "",
-            "cards": []
-        };
-        newColumn.id = this.state.nextColumnId;
-        newColumn.title = title;
-
-        this.setState({
-            columnsData: [...this.state.columnsData, newColumn],
-            nextColumnId: this.state.nextColumnId + 1
-        });
-    };
-
-    onCardAdd = (card) => {
-        this.closeEditPopup();
-        card.id = this.state.nextCardId;
-        this.addCard(card);
-        this.setState({
-            nextCardId: this.state.nextCardId + 1
-        });
-    };
-
-    addCard(newCard) {
-        const data = this.state.columnsData.map(column => {
-            if (column.id === newCard.columnId) {
-                column.cards = [...column.cards, newCard];
-            }
-
-            return column;
-        });
-
-        this.setState({
-            columnsData: data
-        });
-    };
-
     onCardUpdate = (updatedCard) => {
-        this.closeEditPopup();
-        const data = this.state.columnsData.map(column => {
-            if (column.id === updatedCard.columnId) {
-                column.cards = App.updateCards(column.cards, updatedCard);
-            }
-
-            return column;
-        });
-
-        this.setState({
-            columnsData: data
-        });
-    };
-
-    static updateCards(cards, updatedCard) {
-        return cards.map(card => {
-            if (card.id === updatedCard.id) {
-                return updatedCard;
-            }
-
-            return card;
-        });
+        this.props.deselectCard();
+        this.props.closeEditPopup();
+        this.props.onCardUpdate(updatedCard);
     };
 
     onCardDelete = (deletedCard) => {
-        this.closeEditPopup();
-        const data = this.state.columnsData.map(column => {
-            if (column.id === deletedCard.columnId) {
-                column.cards = column.cards.filter(item => item.id !== deletedCard.id)
-            }
-
-            return column;
-        });
-
-        this.setState({
-            columnsData: data
-        });
-    };
-
-    onCardSelect = (id) => {
-        this.selectCard(id);
+        this.props.deselectCard();
+        this.props.closeEditPopup();
+        this.props.onCardDelete(deletedCard);
     };
 
     onCardEdit = (id) => {
-        this.selectCard(id);
-        this.openEditPopup();
+        this.props.selectCard(id);
+        this.props.openEditPopup();
     };
 
     onCardEditCancel = () => {
-        this.closeEditPopup();
+        this.props.deselectCard();
+        this.props.closeEditPopup();
     };
 
-    selectCard(id) {
-        this.setState({
-            selectedCardId: id
-        });
-    };
-
-    deselectCard() {
-        this.setState({
-            selectedCardId: null
-        });
-    };
-
-    openEditPopup() {
-        this.setState({
-            isEditPopupOpen: true
-        });
-    };
-
-    closeEditPopup() {
-        this.setState({
-            isEditPopupOpen: false
-        });
-        this.deselectCard();
-    };
-
-    handleEnterKey() {
-        if (this.state.selectedCardId != null) {
-            this.openEditPopup();
-        }
-    };
-
-    moveCardUp() {
-        let id = this.state.selectedCardId;
-        let columns = this.state.columnsData;
-
-        let column = columns.find(column =>
-            column.cards.findIndex(card => card.id === id) !== -1
-        );
-
-        let from = column.cards.findIndex(card => card.id === id);
-        let to = from - 1;
-
-        if (to >= 0) {
-            column.cards.splice(to, 0, column.cards.splice(from, 1)[0]);
-            this.setState({
-                columnsData: columns
-            });
-        }
-    };
-
-    moveCardDown() {
-        let id = this.state.selectedCardId;
-        let columns = this.state.columnsData;
-
-        let column = columns.find(column =>
-            column.cards.findIndex(card => card.id === id) !== -1
-        );
-
-        let from = column.cards.findIndex(card => card.id === id);
-        let to = from + 1;
-
-        if (to < column.cards.length) {
-            column.cards.splice(to, 0, column.cards.splice(from, 1)[0]);
-            this.setState({
-                columnsData: columns
-            });
-        }
-    };
-
-    moveCardLeft() {
-        let id = this.state.selectedCardId;
-        let columns = this.state.columnsData;
-
-        let from = columns.findIndex(column =>
-            column.cards.find(card => card.id === id) !== undefined
-        );
-        let to = from - 1;
-
-        if (to >= 0) {
-            let columnFrom = columns[from];
-            let columnTo = columns[to];
-            let cardIndex = columnFrom.cards.findIndex(card => card.id === id);
-
-            let movedCard = columnFrom.cards.splice(cardIndex, 1)[0];
-            movedCard.columnId = to;
-            columnTo.cards = [...columnTo.cards, movedCard];
-
-            this.setState({
-                columnsData: columns
-            });
-        }
-    };
-
-    moveCardRight() {
-        let id = this.state.selectedCardId;
-        let columns = this.state.columnsData;
-
-        let from = columns.findIndex(column =>
-            column.cards.find(card => card.id === id) !== undefined
-        );
-        let to = from + 1;
-
-        if (to < columns.length) {
-            let columnFrom = columns[from];
-            let columnTo = columns[to];
-            let cardIndex = columnFrom.cards.findIndex(card => card.id === id);
-
-            let movedCard = columnFrom.cards.splice(cardIndex, 1)[0];
-            movedCard.columnId = to;
-            columnTo.cards = [...columnTo.cards, movedCard];
-
-            this.setState({
-                columnsData: columns
-            });
+    startEditCard() {
+        if (this.props.selectedCardId != null) {
+            this.props.openEditPopup();
         }
     };
 
@@ -249,33 +56,32 @@ class App extends React.Component {
     };
 
     isKeyBoardAllowed() {
-        return ((this.state.selectedCardId !== null) &&
-            !this.state.isEditPopupOpen);
+        return ((this.props.selectedCardId !== null) && !this.props.cardEditing);
     };
 
     onKeyDown = (e) => {
         if (this.isKeyBoardAllowed()) {
             switch (e.key) {
                 case "Enter":
-                    this.handleEnterKey();
+                    this.startEditCard();
                     break;
 
                 case "ArrowUp":
-                    this.moveCardUp();
+                    this.props.moveCardUp(this.props.selectedCardId);
                     break;
 
                 case "ArrowDown":
-                    this.moveCardDown();
+                    this.props.moveCardDown(this.props.selectedCardId);
                     break;
 
                 case "ArrowLeft":
-                    this.moveCardLeft();
-                    App.setCardFocus(this.state.selectedCardId);
+                    this.props.moveCardLeft(this.props.selectedCardId);
+                    App.setCardFocus(this.props.selectedCardId);
                     break;
 
                 case "ArrowRight":
-                    this.moveCardRight();
-                    App.setCardFocus(this.state.selectedCardId);
+                    this.props.moveCardRight(this.props.selectedCardId);
+                    App.setCardFocus(this.props.selectedCardId);
                     break;
 
                 default:
@@ -285,7 +91,7 @@ class App extends React.Component {
     };
 
     onMouseDown = (e) => {
-        if (this.state.selectedCardId != null) {
+        if (this.props.selectedCardId != null) {
             let names = e.path.map(element => {
                 return element.className;
             });
@@ -296,14 +102,21 @@ class App extends React.Component {
                     : false
             );
 
-            if ((index === -1) && !this.state.isEditPopupOpen) {
-                this.deselectCard();
+            if ((index === -1) && !this.props.cardEditing) {
+                this.props.deselectCard();
             }
         }
     };
 
     render() {
-        const {background, onBackgroundChange} = this.props;
+        const {
+            background,
+            onBackgroundChange,
+            columnsData,
+            onColumnAdd,
+            onCardAdd,
+            selectCard
+        } = this.props;
 
         App.setAppBackground(background);
 
@@ -312,24 +125,24 @@ class App extends React.Component {
                 <div className="app">
                     <div className="header">
                         <AppToolbar
-                            onColumnAdd={this.onColumnAdd}
+                            onColumnAdd={onColumnAdd}
                         />
                     </div>
 
                     <div className="content">
                         <div className="board scrollbar">
-                            {this.state.columnsData.map(column =>
+                            {columnsData.map(column =>
                                 <Column
                                     key={column.id}
                                     columnId={column.id}
                                     title={column.title}
                                     cards={column.cards}
-                                    onCardAdd={this.onCardAdd}
+                                    onCardAdd={onCardAdd}
 
-                                    selectedCardId={this.state.selectedCardId}
-                                    onCardSelect={this.onCardSelect}
+                                    selectedCardId={this.props.selectedCardId}
+                                    onCardSelect={selectCard}
 
-                                    isEditPopupOpen={this.state.isEditPopupOpen}
+                                    isEditPopupOpen={this.props.cardEditing}
                                     onCardEdit={this.onCardEdit}
                                     onCardEditCancel={this.onCardEditCancel}
 
@@ -341,7 +154,7 @@ class App extends React.Component {
 
                         <div className="menu">
                             <OptionalMenu
-                                onChange={onBackgroundChange}
+                                onBackgroundChange={onBackgroundChange}
                             />
                         </div>
                     </div>

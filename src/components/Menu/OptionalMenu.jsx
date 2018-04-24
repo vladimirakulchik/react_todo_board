@@ -19,7 +19,7 @@ class OptionalMenu extends React.Component {
                 />
 
                 <ImageGallery
-                    onChange={this.props.onChange}
+                    onChange={this.props.onBackgroundChange}
                 />
             </Paper>
         );

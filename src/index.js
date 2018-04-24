@@ -8,11 +8,13 @@ import './index.css';
 
 const store = createStore(reducer);
 
-console.log(store.getState());
-
 ReactDOM.render(
     <Provider store={store}>
         <App />
     </Provider>,
     document.getElementById('root')
 );
+
+store.subscribe(() => {
+    console.log(store.getState());
+});
