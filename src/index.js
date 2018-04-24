@@ -6,7 +6,17 @@ import App from './containers/App';
 import reducer from './reducers';
 import './index.css';
 
-const store = createStore(reducer);
+let appData = localStorage.getItem("appData");
+let initialState = JSON.parse(appData);
+
+const store = (initialState != null)
+    ? createStore(reducer, initialState)
+    : createStore(reducer);
+
+store.subscribe(() => {
+    let appData = JSON.stringify(store.getState());
+    localStorage.setItem("appData", appData);
+});
 
 ReactDOM.render(
     <Provider store={store}>
@@ -14,7 +24,3 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root')
 );
-
-store.subscribe(() => {
-    console.log(store.getState());
-});
