@@ -115,7 +115,9 @@ class App extends React.Component {
             columnsData,
             onColumnAdd,
             onCardAdd,
-            selectCard
+            selectCard,
+            onUndo,
+            onRedo
         } = this.props;
 
         App.setAppBackground(background);
@@ -126,6 +128,8 @@ class App extends React.Component {
                     <div className="header">
                         <AppToolbar
                             onColumnAdd={onColumnAdd}
+                            onUndo={onUndo}
+                            onRedo={onRedo}
                         />
                     </div>
 

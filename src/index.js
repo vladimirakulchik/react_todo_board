@@ -6,16 +6,10 @@ import App from './containers/App';
 import reducer from './reducers';
 import './index.css';
 
-let appData = localStorage.getItem("appData");
-let initialState = JSON.parse(appData);
-
-const store = (initialState != null)
-    ? createStore(reducer, initialState)
-    : createStore(reducer);
+const store = createStore(reducer, getInitialState());
 
 store.subscribe(() => {
-    let appData = JSON.stringify(store.getState());
-    localStorage.setItem("appData", appData);
+    writeState(store.getState().present);
 });
 
 ReactDOM.render(
@@ -24,3 +18,25 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root')
 );
+
+function getInitialState() {
+    let appData = localStorage.getItem("appData");
+
+    if (appData != null) {
+        return {
+            "past": [],
+            "present": JSON.parse(appData),
+            "future": []
+        };
+    } else {
+        return {
+            "past": [],
+            "present": undefined,
+            "future": []
+        };
+    }
+}
+
+function writeState(state) {
+    localStorage.setItem("appData", JSON.stringify(state));
+}

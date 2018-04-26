@@ -41,102 +41,88 @@ export default function columnsData(state = initialState, action) {
                 {},
                 state,
                 {
-                    data: changeData(state.data, newCard, addCard),
+                    data: modifyData(state.data, newCard, addItem),
                     nextCardId: state.nextCardId + 1
                 }
             );
         }
 
         case CARD_UPDATE: {
-            return assignDataState(
+            return changeDataState(
                 state,
-                changeData(state.data, action.card, updateCard)
+                modifyData(state.data, action.card, updateItem)
             );
         }
 
         case CARD_DELETE: {
-            return assignDataState(
+            return changeDataState(
                 state,
-                changeData(state.data, action.card, deleteCard)
+                modifyData(state.data, action.card, deleteItem)
             );
         }
 
         case MOVE_CARD_UP: {
             let cardId = action.id;
             let columns = [...state.data];
-            let column = findColumn(columns, cardId);
-
+            let column = {...findColumn(columns, cardId)};
+            let cards = [...column.cards];
             let from = findCardIndex(column, cardId);
             let to = from - 1;
 
             if (to >= 0) {
-                column.cards.splice(to, 0, column.cards.splice(from, 1)[0]);
+                cards.splice(to, 0, cards.splice(from, 1)[0]);
 
-                return assignDataState(state, columns);
-            } else {
-                return state;
+                let updatedColumn = changeCardsState(column, cards);
+                let updatedColumns = updateItem(columns, updatedColumn);
+                return changeDataState(state, updatedColumns);
             }
+
+            return state;
         }
 
         case MOVE_CARD_DOWN: {
             let cardId = action.id;
             let columns = [...state.data];
-            let column = findColumn(columns, cardId);
-
+            let column = {...findColumn(columns, cardId)};
+            let cards = [...column.cards];
             let from = findCardIndex(column, cardId);
             let to = from + 1;
 
-            if (to >= 0) {
-                column.cards.splice(to, 0, column.cards.splice(from, 1)[0]);
+            if (to < cards.length) {
+                cards.splice(to, 0, cards.splice(from, 1)[0]);
 
-                return assignDataState(state, columns);
-            } else {
-                return state;
+                let updatedColumn = changeCardsState(column, cards);
+                let updatedColumns = updateItem(columns, updatedColumn);
+                return changeDataState(state, updatedColumns);
             }
+
+            return state;
         }
 
         case MOVE_CARD_LEFT: {
             let cardId = action.id;
             let columns = [...state.data];
-
             let from = findColumnIndex(columns, cardId);
             let to = from - 1;
 
             if (to >= 0) {
-                let columnFrom = columns[from];
-                let columnTo = columns[to];
-                let cardIndex = findCardIndex(columnFrom, cardId);
-
-                let movedCard = columnFrom.cards.splice(cardIndex, 1)[0];
-                movedCard.columnId = to;
-                columnTo.cards = [...columnTo.cards, movedCard];
-
-                return assignDataState(state, columns);
-            } else {
-                return state;
+                return horizontalMove(state, cardId, from, to);
             }
+
+            return state;
         }
 
         case MOVE_CARD_RIGHT: {
             let cardId = action.id;
-            let columns = [...state.data];
-
+            let columns = state.data;
             let from = findColumnIndex(columns, cardId);
             let to = from + 1;
 
             if (to < columns.length) {
-                let columnFrom = columns[from];
-                let columnTo = columns[to];
-                let cardIndex = findCardIndex(columnFrom, cardId);
-
-                let movedCard = columnFrom.cards.splice(cardIndex, 1)[0];
-                movedCard.columnId = to;
-                columnTo.cards = [...columnTo.cards, movedCard];
-
-                return assignDataState(state, columns);
-            } else {
-                return state;
+                return horizontalMove(state, cardId, from, to);
             }
+
+            return state;
         }
 
         default:
@@ -144,45 +130,51 @@ export default function columnsData(state = initialState, action) {
     }
 }
 
-function changeData(data, modifiedCard, modifiedAction) {
+function modifyData(data, modifiedCard, modifiedAction) {
     return data.map(column => {
         if (column.id === modifiedCard.columnId) {
-            column.cards = modifiedAction(column.cards, modifiedCard);
+            return Object.assign(
+                {},
+                column,
+                {
+                    cards: modifiedAction(column.cards, modifiedCard)
+                }
+            );
         }
 
         return column;
     })
 }
 
-function addCard(cards, newCard) {
-    return [...cards, newCard];
+function addItem(collection, newItem) {
+    return [...collection, newItem];
 }
 
-function updateCard(cards, updatedCard) {
-    return cards.map(card => {
-        if (card.id === updatedCard.id) {
-            return updatedCard;
+function updateItem(collection, updatedItem) {
+    return collection.map(item => {
+        if (item.id === updatedItem.id) {
+            return updatedItem;
         }
 
-        return card;
+        return item;
     });
 }
 
-function deleteCard(cards, deletedCard) {
-    return cards.filter(item =>
-        item.id !== deletedCard.id
+function deleteItem(collection, deletedItem) {
+    return collection.filter(item =>
+        item.id !== deletedItem.id
     );
 }
 
 function findColumn(columns, cardId) {
     return columns.find(column =>
-        findCardIndex(column, cardId) !== -1
+        findCardIndex(column, cardId) >= 0
     );
 }
 
 function findColumnIndex(columns, cardId) {
     return columns.findIndex(column =>
-        findCardIndex(column, cardId) !== -1
+        findCardIndex(column, cardId) >= 0
     );
 }
 
@@ -190,7 +182,28 @@ function findCardIndex(column, cardId) {
     return column.cards.findIndex(card => card.id === cardId);
 }
 
-function assignDataState(state, newData) {
+function horizontalMove(state, cardId, from, to) {
+    let columns = [...state.data];
+    let columnFrom = {...columns[from]};
+    let columnTo = {...columns[to]};
+
+    let cardsFrom = [...columnFrom.cards];
+    let cardsTo = [...columnTo.cards];
+
+    let cardIndex = findCardIndex(columnFrom, cardId);
+
+    let movedCard = cardsFrom.splice(cardIndex, 1)[0];
+    movedCard.columnId = to;
+    cardsTo = addItem(cardsTo, movedCard);
+
+    let updatedColumnFrom = changeCardsState(columnFrom, cardsFrom);
+    let updatedColumnTo = changeCardsState(columnTo, cardsTo);
+    let updatedColumns = updateItem(columns, updatedColumnFrom);
+    updatedColumns = updateItem(updatedColumns, updatedColumnTo);
+    return changeDataState(state, updatedColumns);
+}
+
+function changeDataState(state, newData) {
     return Object.assign(
         {},
         state,
@@ -199,3 +212,14 @@ function assignDataState(state, newData) {
         }
     );
 }
+
+function changeCardsState(column, newCards) {
+    return Object.assign(
+        {},
+        column,
+        {
+            cards: newCards
+        }
+    );
+}
+

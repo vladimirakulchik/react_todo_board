@@ -8,11 +8,13 @@ import './AppToolbar.css';
 
 class AppToolbar extends React.Component {
     render() {
+        const {onUndo, onRedo} = this.props;
+
         return (
             <Toolbar className="app-toolbar">
                 <ToolbarGroup firstChild={true} className="app-toolbar-actions">
-                    <UndoButton />
-                    <RedoButton />
+                    <UndoButton onUndo={onUndo} />
+                    <RedoButton onRedo={onRedo} />
                 </ToolbarGroup>
 
                 <ToolbarTitle className="app-toolbar-title" text="TODO Board" />
