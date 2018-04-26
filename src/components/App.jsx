@@ -88,6 +88,23 @@ class App extends React.Component {
                     break;
             }
         }
+
+        switch (e.key) {
+            case "z":
+                if (e.ctrlKey) {
+                    this.props.onUndo();
+                }
+                break;
+
+            case "y":
+                if (e.ctrlKey) {
+                    this.props.onRedo();
+                }
+                break;
+
+            default:
+                break;
+        }
     };
 
     onMouseDown = (e) => {
