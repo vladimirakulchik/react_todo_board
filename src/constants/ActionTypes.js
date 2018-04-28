@@ -13,3 +13,5 @@ export const MOVE_CARD_UP = "MOVE_CARD_UP";
 export const MOVE_CARD_DOWN = "MOVE_CARD_DOWN";
 export const MOVE_CARD_LEFT = "MOVE_CARD_LEFT";
 export const MOVE_CARD_RIGHT = "MOVE_CARD_RIGHT";
+
+export const DRAG_CARD_VERTICAL = "DRAG_CARD_VERTICAL";

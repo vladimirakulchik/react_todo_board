@@ -1,5 +1,7 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DragDropContext } from 'react-dnd';
 import AppToolbar from './AppToolbar/AppToolbar';
 import Column from './Column/Column';
 import OptionalMenu from "./Menu/OptionalMenu";
@@ -133,6 +135,7 @@ class App extends React.Component {
             onColumnAdd,
             onCardAdd,
             selectCard,
+            dragCardVertical,
             onUndo,
             onRedo
         } = this.props;
@@ -169,6 +172,8 @@ class App extends React.Component {
 
                                     onCardUpdate={this.onCardUpdate}
                                     onCardDelete={this.onCardDelete}
+
+                                    onCardDragVertical={dragCardVertical}
                                 />
                             )}
                         </div>
@@ -185,4 +190,4 @@ class App extends React.Component {
     }
 }
 
-export default App;
+export default DragDropContext(HTML5Backend)(App);

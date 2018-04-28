@@ -1,6 +1,11 @@
+.drag-item {
+    margin: 8px 0;
+    border-radius: 20px;
+}
+
 .list-cards-item {
     margin: 0 !important;
-    padding: 6px 0 !important;
+    padding: 0 !important;
 }
 
 .card-details {

@@ -12,16 +12,17 @@ class ListCards extends React.Component {
             isEditPopupOpen,
             onCardEdit, onCardEditCancel,
             onCardUpdate,
-            onCardDelete
+            onCardDelete,
+            onCardDragVertical
         } = this.props;
 
         return (
             <List className="list-cards scrollbar">
                 {
-                    cards.map(card =>
+                    cards.map((card, i) =>
                         <CardDetails
                             key={card.id}
-                            id={card.id}
+                            index={i}
                             card={card}
 
                             selectedId={selectedCardId}
@@ -33,6 +34,8 @@ class ListCards extends React.Component {
 
                             onCardUpdate={onCardUpdate}
                             onCardDelete={onCardDelete}
+
+                            onCardDragVertical={onCardDragVertical}
                         />
                     )
                 }

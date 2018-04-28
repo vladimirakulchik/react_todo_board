@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
 import { changeBackground, openEditPopup, closeEditPopup,
     columnAdd, cardAdd, cardUpdate, cardDelete, cardSelect, cardDeselect,
-    moveCardUp, moveCardDown, moveCardLeft, moveCardRight} from '../actions';
+    moveCardUp, moveCardDown, moveCardLeft, moveCardRight, dragCardVertical } from '../actions';
 import App from '../components/App';
 
 const mapStateToProps = (state) => ({
@@ -26,6 +26,7 @@ const mapDispatchToProps = (dispatch) => ({
     moveCardDown: (id) => dispatch(moveCardDown(id)),
     moveCardLeft: (id) => dispatch(moveCardLeft(id)),
     moveCardRight: (id) => dispatch(moveCardRight(id)),
+    onCardDragVertical: (id, from, to) => dispatch(dragCardVertical(id, from, to)),
     onUndo: () => dispatch(UndoActionCreators.undo()),
     onRedo: () => dispatch(UndoActionCreators.redo())
 });
