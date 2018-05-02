@@ -2,7 +2,6 @@ import React from 'react';
 import ListItem from 'material-ui/List';
 import {Card, CardTitle, CardText} from 'material-ui/Card';
 import { DragSource, DropTarget } from 'react-dnd';
-import { findDOMNode } from 'react-dom';
 import CardEditButton from './CardEditButton';
 import { CARD_TYPE } from '../../constants/ItemTypes';
 import './CardDetails.css';
@@ -10,60 +9,25 @@ import './CardDetails.css';
 const source = {
     beginDrag(props) {
         return {
-            id: props.card.id,
-            index: props.index
+            id: props.card.id
         };
     },
 
-    // endDrag(props, monitor) {
-    //     console.log("monitor", monitor.didDrop());
-    //     console.log("item", monitor.getItem());
-    //
-    //
-    //     const { cardId, originalIndex } = monitor.getItem();
-    //     const didDrop = monitor.didDrop();
-    //
-    //     if (!didDrop) {
-    //         props.onCardDragVertical(cardId, originalIndex, originalIndex);
-    //     }
-    // }
+    isDragging(props, monitor) {
+        return monitor.getItem().id === props.card.id;
+    }
 };
 
 const target = {
-    // canDrop() {
-    //     return false;
-    // },
-
-    hover(props, monitor, component) {
+    hover(props, monitor) {
         const dragId = monitor.getItem().id;
-        const dragIndex = monitor.getItem().index;
         const hoverId = props.card.id;
-        const hoverIndex = props.index;
 
-        // console.log("dragId", dragId, "dragIndex", dragIndex, "hoverId", hoverId, "hoverIndex", hoverIndex);
-
-        if (dragIndex === hoverIndex) {
+        if (dragId === hoverId) {
             return;
         }
 
-        const hoverBoundingRect = findDOMNode(component).getBoundingClientRect();
-        const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-        const clientOffset = monitor.getClientOffset();
-        const hoverClientY = clientOffset.y - hoverBoundingRect.top;
-
-        // Dragging downwards
-        if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-            return;
-        }
-
-        // Dragging upwards
-        if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-            return;
-        }
-
-        props.onCardDragVertical(props.card.id, dragIndex, hoverIndex);
-
-        monitor.getItem().index = hoverIndex;
+        props.onCardDrag(dragId, hoverId);
     }
 };
 
@@ -94,13 +58,13 @@ class CardDetails extends React.Component {
     render() {
         const {id, title, text, color} = this.props.card;
         const {selectedId, onCardSelect, isEditPopupOpen, onCardEdit, onCardEditCancel} = this.props;
-        const { isDragging, connectDragSource, connectDropTarget } = this.props;
+        const { isDragging, connectDragSource,  connectDropTarget } = this.props;
 
         let isOpen = ((id === selectedId) && isEditPopupOpen);
 
         return connectDragSource(
             connectDropTarget(
-                <div className="drag-item" style={{ opacity: isDragging ? 0 : 1 }}>
+                <div className="drag-item" style={{ opacity: (isDragging) ? 0 : 1 }}>
                     <ListItem className="list-cards-item" onClick={onCardSelect.bind(this, id)} >
                         <Card className="card-details" value={id} tabIndex={-1} style={{backgroundColor: color}}>
                             <CardEditButton

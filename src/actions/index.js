@@ -62,9 +62,8 @@ export const moveCardRight = (id) => ({
     id
 });
 
-export const dragCardVertical = (id, from, to) => ({
-    type: types.DRAG_CARD_VERTICAL,
+export const dragCard = (id, hoverId) => ({
+    type: types.DRAG_CARD,
     id,
-    from,
-    to
+    hoverId
 });

@@ -29,7 +29,7 @@ class Column extends React.Component {
             selectedCardId, onCardSelect,
             isEditPopupOpen,
             onCardEdit, onCardEditCancel,
-            onCardDragVertical
+            onCardDrag
         } = this.props;
 
         return(
@@ -50,7 +50,7 @@ class Column extends React.Component {
                         onCardUpdate={this.onCardUpdate}
                         onCardDelete={this.onCardDelete}
 
-                        onCardDragVertical={onCardDragVertical}
+                        onCardDrag={onCardDrag}
                     />
 
                     <AddCardButton onCardAdd={this.onCardAdd} />

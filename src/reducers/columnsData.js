@@ -1,6 +1,6 @@
 import { COLUMN_ADD, CARD_ADD, CARD_UPDATE, CARD_DELETE,
     MOVE_CARD_UP, MOVE_CARD_DOWN, MOVE_CARD_LEFT, MOVE_CARD_RIGHT,
-    DRAG_CARD_VERTICAL } from "../constants/ActionTypes";
+    DRAG_CARD } from "../constants/ActionTypes";
 
 const initialState = {
     data: [
@@ -112,12 +112,25 @@ export default function columnsData(state = initialState, action) {
             return state;
         }
 
-        case DRAG_CARD_VERTICAL: {
+        case DRAG_CARD: {
             const cardId = action.id;
-            const from = action.from;
-            const to = action.to;
+            const hoverId = action.hoverId;
 
-            return verticalMove(state, cardId, from, to);
+            const fromColumn = findColumnIndex(state.data, cardId);
+            const toColumn = findColumnIndex(state.data, hoverId);
+
+            if (fromColumn === toColumn) {
+                const column = findColumn(state.data, cardId);
+                const from = findCardIndex(column, cardId);
+                const to = findCardIndex(column, hoverId);
+
+                return verticalMove(state, cardId, from, to);
+            } else {
+                const column = findColumn(state.data, hoverId);
+                const toIndex = findCardIndex(column, hoverId);
+
+                return horizontalMoveToIndex(state, cardId, fromColumn, toColumn, toIndex);
+            }
         }
 
         default:
@@ -202,6 +215,27 @@ function horizontalMove(state, cardId, from, to) {
     let movedCard = cardsFrom.splice(cardIndex, 1)[0];
     movedCard.columnId = to;
     cardsTo = addItem(cardsTo, movedCard);
+
+    let updatedColumnFrom = changeCardsState(columnFrom, cardsFrom);
+    let updatedColumnTo = changeCardsState(columnTo, cardsTo);
+    let updatedColumns = updateItem(columns, updatedColumnFrom);
+    updatedColumns = updateItem(updatedColumns, updatedColumnTo);
+    return changeDataState(state, updatedColumns);
+}
+
+function horizontalMoveToIndex(state, cardId, fromColumn, toColumn, toIndex) {
+    let columns = [...state.data];
+    let columnFrom = {...columns[fromColumn]};
+    let columnTo = {...columns[toColumn]};
+
+    let cardsFrom = [...columnFrom.cards];
+    let cardsTo = [...columnTo.cards];
+
+    let cardIndex = findCardIndex(columnFrom, cardId);
+
+    let movedCard = cardsFrom.splice(cardIndex, 1)[0];
+    movedCard.columnId = toColumn;
+    cardsTo.splice(toIndex, 0, movedCard);
 
     let updatedColumnFrom = changeCardsState(columnFrom, cardsFrom);
     let updatedColumnTo = changeCardsState(columnTo, cardsTo);

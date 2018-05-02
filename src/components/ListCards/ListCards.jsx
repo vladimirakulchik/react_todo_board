@@ -13,7 +13,7 @@ class ListCards extends React.Component {
             onCardEdit, onCardEditCancel,
             onCardUpdate,
             onCardDelete,
-            onCardDragVertical
+            onCardDrag
         } = this.props;
 
         return (
@@ -35,7 +35,7 @@ class ListCards extends React.Component {
                             onCardUpdate={onCardUpdate}
                             onCardDelete={onCardDelete}
 
-                            onCardDragVertical={onCardDragVertical}
+                            onCardDrag={onCardDrag}
                         />
                     )
                 }
