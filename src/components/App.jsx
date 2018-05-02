@@ -135,7 +135,7 @@ class App extends React.Component {
             onColumnAdd,
             onCardAdd,
             selectCard,
-            dragCardVertical,
+            onCardDragVertical,
             onUndo,
             onRedo
         } = this.props;
@@ -173,7 +173,7 @@ class App extends React.Component {
                                     onCardUpdate={this.onCardUpdate}
                                     onCardDelete={this.onCardDelete}
 
-                                    onCardDragVertical={dragCardVertical}
+                                    onCardDragVertical={onCardDragVertical}
                                 />
                             )}
                         </div>
