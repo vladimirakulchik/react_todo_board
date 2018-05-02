@@ -1,6 +1,6 @@
 import { COLUMN_ADD, CARD_ADD, CARD_UPDATE, CARD_DELETE,
     MOVE_CARD_UP, MOVE_CARD_DOWN, MOVE_CARD_LEFT, MOVE_CARD_RIGHT,
-    DRAG_CARD } from "../constants/ActionTypes";
+    DRAG_CARD, DRAG_CARD_TO_COLUMN } from "../constants/ActionTypes";
 
 const initialState = {
     data: [
@@ -133,6 +133,20 @@ export default function columnsData(state = initialState, action) {
             }
         }
 
+        case DRAG_CARD_TO_COLUMN: {
+            const cardId = action.id;
+            const hoverColumnId = action.columnId;
+
+            const from = findColumnIndex(state.data, cardId);
+            const to = findColumnIndexById(state.data, hoverColumnId);
+
+            if (from !== to) {
+                return horizontalMove(state, cardId, from, to);
+            }
+
+            return state;
+        }
+
         default:
             return state;
     }
@@ -184,6 +198,10 @@ function findColumnIndex(columns, cardId) {
     return columns.findIndex(column =>
         findCardIndex(column, cardId) >= 0
     );
+}
+
+function findColumnIndexById(columns, columnId) {
+    return columns.findIndex(column => column.id === columnId);
 }
 
 function findCardIndex(column, cardId) {

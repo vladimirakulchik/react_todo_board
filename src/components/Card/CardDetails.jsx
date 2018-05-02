@@ -9,7 +9,8 @@ import './CardDetails.css';
 const source = {
     beginDrag(props) {
         return {
-            id: props.card.id
+            id: props.card.id,
+            columnId: props.card.columnId
         };
     },
 
@@ -38,7 +39,7 @@ function collectSource(connect, monitor) {
     };
 }
 
-function collectTarget(connect, monitor) {
+function collectTarget(connect) {
     return {
         connectDropTarget: connect.dropTarget()
     }

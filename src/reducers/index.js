@@ -5,7 +5,8 @@ import columnsData from './columnsData';
 import selectedCardId from './selectedCardId';
 import cardEditing from './cardEditing';
 import { BACKGROUND_CHANGE, COLUMN_ADD, CARD_ADD, CARD_UPDATE, CARD_DELETE,
-    MOVE_CARD_UP, MOVE_CARD_DOWN, MOVE_CARD_LEFT, MOVE_CARD_RIGHT, DRAG_CARD } from '../constants/ActionTypes';
+    MOVE_CARD_UP, MOVE_CARD_DOWN, MOVE_CARD_LEFT, MOVE_CARD_RIGHT,
+    DRAG_CARD, DRAG_CARD_TO_COLUMN } from '../constants/ActionTypes';
 
 const rootReducer = combineReducers({
     background,
@@ -24,7 +25,8 @@ const actions = [
     MOVE_CARD_DOWN,
     MOVE_CARD_LEFT,
     MOVE_CARD_RIGHT,
-    DRAG_CARD
+    DRAG_CARD,
+    DRAG_CARD_TO_COLUMN
 ];
 
 const undoableRootReducer = undoable(

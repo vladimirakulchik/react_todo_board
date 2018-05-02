@@ -136,6 +136,7 @@ class App extends React.Component {
             onCardAdd,
             selectCard,
             onCardDrag,
+            onCardDragToColumn,
             onUndo,
             onRedo
         } = this.props;
@@ -174,6 +175,7 @@ class App extends React.Component {
                                     onCardDelete={this.onCardDelete}
 
                                     onCardDrag={onCardDrag}
+                                    onCardDragToColumn={onCardDragToColumn}
                                 />
                             )}
                         </div>

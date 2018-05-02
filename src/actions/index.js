@@ -67,3 +67,9 @@ export const dragCard = (id, hoverId) => ({
     id,
     hoverId
 });
+
+export const dragCardToColumn = (id, columnId) => ({
+    type: types.DRAG_CARD_TO_COLUMN,
+    id,
+    columnId
+});

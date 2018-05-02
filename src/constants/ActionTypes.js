@@ -15,3 +15,4 @@ export const MOVE_CARD_LEFT = "MOVE_CARD_LEFT";
 export const MOVE_CARD_RIGHT = "MOVE_CARD_RIGHT";
 
 export const DRAG_CARD = "DRAG_CARD";
+export const DRAG_CARD_TO_COLUMN = "DRAG_CARD_TO_COLUMN";

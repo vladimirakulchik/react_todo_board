@@ -19,10 +19,9 @@ class ListCards extends React.Component {
         return (
             <List className="list-cards scrollbar">
                 {
-                    cards.map((card, i) =>
+                    cards.map(card =>
                         <CardDetails
                             key={card.id}
-                            index={i}
                             card={card}
 
                             selectedId={selectedCardId}
