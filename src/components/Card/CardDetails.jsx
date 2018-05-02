@@ -9,8 +9,7 @@ import './CardDetails.css';
 const source = {
     beginDrag(props) {
         return {
-            id: props.card.id,
-            columnId: props.card.columnId
+            id: props.card.id
         };
     },
 
@@ -65,25 +64,31 @@ class CardDetails extends React.Component {
 
         return connectDragSource(
             connectDropTarget(
-                <div className="drag-item" style={{ opacity: (isDragging) ? 0 : 1 }}>
+                <div className="drag-item" style={{ opacity: (isDragging) ? 0.3 : 1 }}>
                     <ListItem className="list-cards-item" onClick={onCardSelect.bind(this, id)} >
-                        <Card className="card-details" value={id} tabIndex={-1} style={{backgroundColor: color}}>
-                            <CardEditButton
-                                title={title}
-                                text={text}
-                                color={color}
-                                isOpen={isOpen}
-                                onCardEdit={onCardEdit.bind(this, id)}
-                                onCardEditCancel={onCardEditCancel}
-                                onCardUpdate={this.onCardUpdate}
-                                onCardDelete={this.onCardDelete}
-                            />
+                        <Card className="card-details"
+                              value={id}
+                              tabIndex={-1}
+                              style={{backgroundColor: color}}>
 
-                            <CardTitle className="card-title" title={CardDetails.truncate(title, 15)} />
+                            <div style={{ opacity: (isDragging) ? 0 : 1 }}>
+                                <CardEditButton
+                                    title={title}
+                                    text={text}
+                                    color={color}
+                                    isOpen={isOpen}
+                                    onCardEdit={onCardEdit.bind(this, id)}
+                                    onCardEditCancel={onCardEditCancel}
+                                    onCardUpdate={this.onCardUpdate}
+                                    onCardDelete={this.onCardDelete}
+                                />
 
-                            <CardText className="card-text">
-                                {CardDetails.truncate(text)}
-                            </CardText>
+                                <CardTitle className="card-title" title={CardDetails.truncate(title, 15)} />
+
+                                <CardText className="card-text">
+                                    {CardDetails.truncate(text)}
+                                </CardText>
+                            </div>
                         </Card>
                     </ListItem>
                 </div>

@@ -11,12 +11,7 @@ import '../Scrollbar.css';
 const target = {
     hover(props, monitor) {
         const dragCardId = monitor.getItem().id;
-        const dragColumnId = monitor.getItem().columnId;
         const hoverColumnId = props.columnId;
-
-        if (dragColumnId === hoverColumnId) {
-            return;
-        }
 
         props.onCardDragToColumn(dragCardId, hoverColumnId);
     }
