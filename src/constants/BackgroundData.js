@@ -51,41 +51,81 @@ export const BACKGROUND_DATA = [
     },
     {
         id: 10,
+        color: "",
+        photo: "url(image/photo-11.jpg)"
+    },
+    {
+        id: 11,
+        color: "",
+        photo: "url(image/photo-12.jpg)"
+    },
+    {
+        id: 12,
+        color: "",
+        photo: "url(image/photo-13.jpg)"
+    },
+    {
+        id: 13,
+        color: "",
+        photo: "url(image/photo-14.jpg)"
+    },
+    {
+        id: 14,
+        color: "",
+        photo: "url(image/photo-15.jpg)"
+    },
+    {
+        id: 15,
+        color: "",
+        photo: "url(image/photo-16.jpg)"
+    },
+    {
+        id: 16,
+        color: "",
+        photo: "url(image/photo-17.jpg)"
+    },
+    {
+        id: 17,
+        color: "",
+        photo: "url(image/photo-18.jpg)"
+    },
+    {
+        id: 18,
         color: "#0079BF",
         photo: "none"
     },
     {
-        id: 11,
+        id: 19,
         color: "#00AECC",
         photo: "none"
     },
     {
-        id: 12,
+        id: 20,
         color: "#519839",
         photo: "none"
     },
     {
-        id: 13,
+        id: 21,
         color: "#4BBF6B",
         photo: "none"
     },
     {
-        id: 14,
+        id: 22,
         color: "#89609E",
         photo: "none"
     },
     {
-        id: 15,
+        id: 23,
         color: "#CD5A91",
         photo: "none"
     },
     {
-        id: 16,
+        id: 24,
         color: "#B04632",
         photo: "none"
     },
     {
-        id: 17,
+        id: 25,
         color: "#D29034",
         photo: "none"
     }
