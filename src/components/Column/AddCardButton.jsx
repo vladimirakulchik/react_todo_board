@@ -1,8 +1,8 @@
-import React from 'react';
-import FlatButton from 'material-ui/FlatButton';
-import Popup from '../Popup/Popup';
-import CardEdit from '../Card/CardEdit';
-import './AddCardButton.css';
+import React from "react";
+import FlatButton from "material-ui/FlatButton";
+import Popup from "../Popup/Popup";
+import CardEdit from "../Card/CardEdit";
+import "./AddCardButton.css";
 
 class AddCardButton extends React.Component {
     state = {
@@ -73,7 +73,7 @@ class AddCardButton extends React.Component {
                     />
                 </Popup>
             </div>
-        )
+        );
     }
 }
 

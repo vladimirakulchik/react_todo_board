@@ -1,7 +1,7 @@
-import React from 'react';
-import Divider from 'material-ui/Divider';
-import CloseButton from './CloseButton';
-import './MenuHeader.css';
+import React from "react";
+import Divider from "material-ui/Divider";
+import CloseButton from "./CloseButton";
+import "./MenuHeader.css";
 
 function MenuHeader(props) {
     return(

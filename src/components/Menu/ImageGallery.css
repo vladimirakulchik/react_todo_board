@@ -1,25 +1,25 @@
 .image-gallery {
-    flex: 1 1 auto !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    margin: 0 4px !important;
-    padding: 8px 12px 8px 8px !important;
+  flex: 1 1 auto !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  margin: 0 4px !important;
+  padding: 8px 12px 8px 8px !important;
 }
 
 .background-section {
-    position: relative;
-    box-sizing: border-box;
-    float: left;
-    padding: 0 4px;
-    width: 50%;
+  position: relative;
+  box-sizing: border-box;
+  float: left;
+  padding: 0 4px;
+  width: 50%;
 }
 
 .background-section .image {
-    background-color: #ddd;
-    background-size: cover;
-    border-radius: 10px;
-    height: 112px;
-    margin-bottom: 8px;
-    width: 100%;
-    cursor: pointer;
+  background-color: #ddd;
+  background-size: cover;
+  border-radius: 10px;
+  height: 112px;
+  margin-bottom: 8px;
+  width: 100%;
+  cursor: pointer;
 }

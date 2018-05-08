@@ -1,6 +1,4 @@
-import { COLUMN_ADD, CARD_ADD, CARD_UPDATE, CARD_DELETE,
-    MOVE_CARD_UP, MOVE_CARD_DOWN, MOVE_CARD_LEFT, MOVE_CARD_RIGHT,
-    DRAG_CARD, DRAG_CARD_TO_COLUMN } from "../constants/ActionTypes";
+import * as types from "../constants/ActionTypes";
 
 const initialState = {
     data: [
@@ -16,139 +14,139 @@ const initialState = {
 
 export default function columnsData(state = initialState, action) {
     switch (action.type) {
-        case COLUMN_ADD: {
-            return Object.assign(
-                {},
-                state,
-                {
-                    data: [
-                        ...state.data,
-                        {
-                            id: state.nextColumnId,
-                            title: action.title,
-                            cards: []
-                        }
-                    ],
-                    nextColumnId: state.nextColumnId + 1
-                }
-            );
+    case types.COLUMN_ADD: {
+        return Object.assign(
+            {},
+            state,
+            {
+                data: [
+                    ...state.data,
+                    {
+                        id: state.nextColumnId,
+                        title: action.title,
+                        cards: []
+                    }
+                ],
+                nextColumnId: state.nextColumnId + 1
+            }
+        );
+    }
+
+    case types.CARD_ADD: {
+        let newCard = action.card;
+        newCard.id = state.nextCardId;
+
+        return Object.assign(
+            {},
+            state,
+            {
+                data: modifyData(state.data, newCard, addItem),
+                nextCardId: state.nextCardId + 1
+            }
+        );
+    }
+
+    case types.CARD_UPDATE: {
+        return changeDataState(
+            state,
+            modifyData(state.data, action.card, updateItem)
+        );
+    }
+
+    case types.CARD_DELETE: {
+        return changeDataState(
+            state,
+            modifyData(state.data, action.card, deleteItem)
+        );
+    }
+
+    case types.MOVE_CARD_UP: {
+        const cardId = action.id;
+        const column = findColumn(state.data, cardId);
+        const from = findCardIndex(column, cardId);
+        const to = from - 1;
+
+        if (to >= 0) {
+            return verticalMove(state, cardId, from, to);
         }
 
-        case CARD_ADD: {
-            let newCard = action.card;
-            newCard.id = state.nextCardId;
+        return state;
+    }
 
-            return Object.assign(
-                {},
-                state,
-                {
-                    data: modifyData(state.data, newCard, addItem),
-                    nextCardId: state.nextCardId + 1
-                }
-            );
+    case types.MOVE_CARD_DOWN: {
+        const cardId = action.id;
+        const column = findColumn(state.data, cardId);
+        const from = findCardIndex(column, cardId);
+        const to = from + 1;
+
+        if (to < column.cards.length) {
+            return verticalMove(state, cardId, from, to);
         }
 
-        case CARD_UPDATE: {
-            return changeDataState(
-                state,
-                modifyData(state.data, action.card, updateItem)
-            );
+        return state;
+    }
+
+    case types.MOVE_CARD_LEFT: {
+        const cardId = action.id;
+        const from = findColumnIndex(state.data, cardId);
+        const to = from - 1;
+
+        if (to >= 0) {
+            return horizontalMove(state, cardId, from, to);
         }
 
-        case CARD_DELETE: {
-            return changeDataState(
-                state,
-                modifyData(state.data, action.card, deleteItem)
-            );
+        return state;
+    }
+
+    case types.MOVE_CARD_RIGHT: {
+        const cardId = action.id;
+        const from = findColumnIndex(state.data, cardId);
+        const to = from + 1;
+
+        if (to < state.data.length) {
+            return horizontalMove(state, cardId, from, to);
         }
 
-        case MOVE_CARD_UP: {
-            const cardId = action.id;
+        return state;
+    }
+
+    case types.DRAG_CARD: {
+        const cardId = action.id;
+        const hoverId = action.hoverId;
+
+        const fromColumn = findColumnIndex(state.data, cardId);
+        const toColumn = findColumnIndex(state.data, hoverId);
+
+        if (fromColumn === toColumn) {
             const column = findColumn(state.data, cardId);
             const from = findCardIndex(column, cardId);
-            const to = from - 1;
+            const to = findCardIndex(column, hoverId);
 
-            if (to >= 0) {
-                return verticalMove(state, cardId, from, to);
-            }
+            return verticalMove(state, cardId, from, to);
+        } else {
+            const column = findColumn(state.data, hoverId);
+            const toIndex = findCardIndex(column, hoverId);
 
-            return state;
+            return horizontalMoveToIndex(state, cardId, fromColumn, toColumn, toIndex);
+        }
+    }
+
+    case types.DRAG_CARD_TO_COLUMN: {
+        const cardId = action.id;
+        const hoverColumnId = action.columnId;
+
+        const from = findColumnIndex(state.data, cardId);
+        const to = findColumnIndexById(state.data, hoverColumnId);
+
+        if (from !== to) {
+            return horizontalMove(state, cardId, from, to);
         }
 
-        case MOVE_CARD_DOWN: {
-            const cardId = action.id;
-            const column = findColumn(state.data, cardId);
-            const from = findCardIndex(column, cardId);
-            const to = from + 1;
+        return state;
+    }
 
-            if (to < column.cards.length) {
-                return verticalMove(state, cardId, from, to);
-            }
-
-            return state;
-        }
-
-        case MOVE_CARD_LEFT: {
-            const cardId = action.id;
-            const from = findColumnIndex(state.data, cardId);
-            const to = from - 1;
-
-            if (to >= 0) {
-                return horizontalMove(state, cardId, from, to);
-            }
-
-            return state;
-        }
-
-        case MOVE_CARD_RIGHT: {
-            const cardId = action.id;
-            const from = findColumnIndex(state.data, cardId);
-            const to = from + 1;
-
-            if (to < state.data.length) {
-                return horizontalMove(state, cardId, from, to);
-            }
-
-            return state;
-        }
-
-        case DRAG_CARD: {
-            const cardId = action.id;
-            const hoverId = action.hoverId;
-
-            const fromColumn = findColumnIndex(state.data, cardId);
-            const toColumn = findColumnIndex(state.data, hoverId);
-
-            if (fromColumn === toColumn) {
-                const column = findColumn(state.data, cardId);
-                const from = findCardIndex(column, cardId);
-                const to = findCardIndex(column, hoverId);
-
-                return verticalMove(state, cardId, from, to);
-            } else {
-                const column = findColumn(state.data, hoverId);
-                const toIndex = findCardIndex(column, hoverId);
-
-                return horizontalMoveToIndex(state, cardId, fromColumn, toColumn, toIndex);
-            }
-        }
-
-        case DRAG_CARD_TO_COLUMN: {
-            const cardId = action.id;
-            const hoverColumnId = action.columnId;
-
-            const from = findColumnIndex(state.data, cardId);
-            const to = findColumnIndexById(state.data, hoverColumnId);
-
-            if (from !== to) {
-                return horizontalMove(state, cardId, from, to);
-            }
-
-            return state;
-        }
-
-        default:
-            return state;
+    default:
+        return state;
     }
 }
 
@@ -165,7 +163,7 @@ function modifyData(data, modifiedCard, modifiedAction) {
         }
 
         return column;
-    })
+    });
 }
 
 function addItem(collection, newItem) {

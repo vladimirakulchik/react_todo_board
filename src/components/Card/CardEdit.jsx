@@ -1,10 +1,10 @@
-import React from 'react';
-import TextField from 'material-ui/TextField';
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
-import ColorChecked from 'material-ui/svg-icons/toggle/radio-button-checked';
-import ColorUnchecked from 'material-ui/svg-icons/image/brightness-1';
-import * as colors from '../../constants/CardColors';
-import './CardEdit.css';
+import React from "react";
+import TextField from "material-ui/TextField";
+import {RadioButton, RadioButtonGroup} from "material-ui/RadioButton";
+import ColorChecked from "material-ui/svg-icons/toggle/radio-button-checked";
+import ColorUnchecked from "material-ui/svg-icons/image/brightness-1";
+import * as colors from "../../constants/CardColors";
+import "./CardEdit.css";
 
 class CardEdit extends React.Component {
     render() {

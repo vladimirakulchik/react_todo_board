@@ -1,9 +1,7 @@
-import { connect } from 'react-redux';
-import { ActionCreators as UndoActionCreators } from 'redux-undo';
-import { changeBackground, openEditPopup, closeEditPopup,
-    columnAdd, cardAdd, cardUpdate, cardDelete, cardSelect, cardDeselect,
-    moveCardUp, moveCardDown, moveCardLeft, moveCardRight, dragCard, dragCardToColumn } from '../actions';
-import App from '../components/App';
+import { connect } from "react-redux";
+import { ActionCreators as UndoActionCreators } from "redux-undo";
+import * as actions from "../actions";
+import App from "../components/App";
 
 const mapStateToProps = (state) => ({
     background: state.present.background,
@@ -13,21 +11,21 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    onBackgroundChange: (background) => dispatch(changeBackground(background)),
-    openEditPopup: () => dispatch(openEditPopup()),
-    closeEditPopup: () => dispatch(closeEditPopup()),
-    onColumnAdd: (title) => dispatch(columnAdd(title)),
-    onCardAdd: (card) => dispatch(cardAdd(card)),
-    onCardUpdate: (card) => dispatch(cardUpdate(card)),
-    onCardDelete: (card) => dispatch(cardDelete(card)),
-    selectCard: (id) => dispatch(cardSelect(id)),
-    deselectCard: () => dispatch(cardDeselect()),
-    moveCardUp: (id) => dispatch(moveCardUp(id)),
-    moveCardDown: (id) => dispatch(moveCardDown(id)),
-    moveCardLeft: (id) => dispatch(moveCardLeft(id)),
-    moveCardRight: (id) => dispatch(moveCardRight(id)),
-    onCardDrag: (id, hoverId) => dispatch(dragCard(id, hoverId)),
-    onCardDragToColumn: (id, columnId) => dispatch(dragCardToColumn(id, columnId)),
+    onBackgroundChange: (background) => dispatch(actions.changeBackground(background)),
+    openEditPopup: () => dispatch(actions.openEditPopup()),
+    closeEditPopup: () => dispatch(actions.closeEditPopup()),
+    onColumnAdd: (title) => dispatch(actions.columnAdd(title)),
+    onCardAdd: (card) => dispatch(actions.cardAdd(card)),
+    onCardUpdate: (card) => dispatch(actions.cardUpdate(card)),
+    onCardDelete: (card) => dispatch(actions.cardDelete(card)),
+    selectCard: (id) => dispatch(actions.cardSelect(id)),
+    deselectCard: () => dispatch(actions.cardDeselect()),
+    moveCardUp: (id) => dispatch(actions.moveCardUp(id)),
+    moveCardDown: (id) => dispatch(actions.moveCardDown(id)),
+    moveCardLeft: (id) => dispatch(actions.moveCardLeft(id)),
+    moveCardRight: (id) => dispatch(actions.moveCardRight(id)),
+    onCardDrag: (id, hoverId) => dispatch(actions.dragCard(id, hoverId)),
+    onCardDragToColumn: (id, columnId) => dispatch(actions.dragCardToColumn(id, columnId)),
     onUndo: () => dispatch(UndoActionCreators.undo()),
     onRedo: () => dispatch(UndoActionCreators.redo())
 });

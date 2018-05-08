@@ -1,10 +1,10 @@
-import React from 'react';
-import ListItem from 'material-ui/List';
-import {Card, CardTitle, CardText} from 'material-ui/Card';
-import { DragSource, DropTarget } from 'react-dnd';
-import CardEditButton from './CardEditButton';
-import { CARD_TYPE } from '../../constants/ItemTypes';
-import './CardDetails.css';
+import React from "react";
+import ListItem from "material-ui/List";
+import {Card, CardTitle, CardText} from "material-ui/Card";
+import { DragSource, DropTarget } from "react-dnd";
+import CardEditButton from "./CardEditButton";
+import { CARD_TYPE } from "../../constants/ItemTypes";
+import "./CardDetails.css";
 
 const source = {
     beginDrag(props) {
@@ -41,7 +41,7 @@ function collectSource(connect, monitor) {
 function collectTarget(connect) {
     return {
         connectDropTarget: connect.dropTarget()
-    }
+    };
 }
 
 class CardDetails extends React.Component {
@@ -67,9 +67,9 @@ class CardDetails extends React.Component {
                 <div className="drag-item" style={{ opacity: (isDragging) ? 0.3 : 1 }}>
                     <ListItem className="list-cards-item" onClick={onCardSelect.bind(this, id)} >
                         <Card className="card-details"
-                              value={id}
-                              tabIndex={-1}
-                              style={{backgroundColor: color}}>
+                            value={id}
+                            tabIndex={-1}
+                            style={{backgroundColor: color}}>
 
                             <div style={{ opacity: (isDragging) ? 0 : 1 }}>
                                 <CardEditButton
@@ -94,7 +94,7 @@ class CardDetails extends React.Component {
                 </div>
             )
         );
-    };
+    }
 
     static truncate(text, size) {
         let maxSize = (size != null) ? size : 350;
@@ -105,7 +105,7 @@ class CardDetails extends React.Component {
         }
 
         return result;
-    };
+    }
 }
 
 export default DropTarget(CARD_TYPE, target, collectTarget)(DragSource(CARD_TYPE, source, collectSource)(CardDetails));

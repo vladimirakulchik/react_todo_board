@@ -1,10 +1,10 @@
-import React from 'react';
-import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
-import RedoButton from './RedoButton';
-import UndoButton from './UndoButton';
-import AddColumnButton from './AddColumnButton';
-import MenuSettings from './MenuSettings';
-import './AppToolbar.css';
+import React from "react";
+import {Toolbar, ToolbarGroup, ToolbarTitle} from "material-ui/Toolbar";
+import RedoButton from "./RedoButton";
+import UndoButton from "./UndoButton";
+import AddColumnButton from "./AddColumnButton";
+import MenuSettings from "./MenuSettings";
+import "./AppToolbar.css";
 
 class AppToolbar extends React.Component {
     render() {

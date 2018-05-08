@@ -1,23 +1,23 @@
-import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import HTML5Backend from 'react-dnd-html5-backend';
-import { DragDropContext } from 'react-dnd';
-import AppToolbar from './AppToolbar/AppToolbar';
-import Column from './Column/Column';
+import React from "react";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import HTML5Backend from "react-dnd-html5-backend";
+import { DragDropContext } from "react-dnd";
+import AppToolbar from "./AppToolbar/AppToolbar";
+import Column from "./Column/Column";
 import OptionalMenu from "./Menu/OptionalMenu";
-import './App.css';
-import './Scrollbar.css';
+import "./App.css";
+import "./Scrollbar.css";
 
 class App extends React.Component {
     componentWillMount() {
-        document.getElementsByTagName('body')[0].addEventListener("keydown", this.onKeyDown);
-        document.getElementsByTagName('body')[0].addEventListener("mousedown", this.onMouseDown);
-    };
+        document.getElementsByTagName("body")[0].addEventListener("keydown", this.onKeyDown);
+        document.getElementsByTagName("body")[0].addEventListener("mousedown", this.onMouseDown);
+    }
 
     static setAppBackground(background) {
         document.getElementById("root").style.backgroundColor = background.bgColor;
         document.getElementById("root").style.backgroundImage = background.bgImage;
-    };
+    }
 
     onCardUpdate = (updatedCard) => {
         this.props.deselectCard();
@@ -45,7 +45,7 @@ class App extends React.Component {
         if (this.props.selectedCardId != null) {
             this.props.openEditPopup();
         }
-    };
+    }
 
     static setCardFocus(id) {
         let cards = document.getElementsByClassName("card-details");
@@ -55,57 +55,57 @@ class App extends React.Component {
                 item.focus();
             }
         }
-    };
+    }
 
     isKeyBoardAllowed() {
         return ((this.props.selectedCardId !== null) && !this.props.cardEditing);
-    };
+    }
 
     onKeyDown = (e) => {
         if (this.isKeyBoardAllowed()) {
             switch (e.key) {
-                case "Enter":
-                    this.startEditCard();
-                    break;
-
-                case "ArrowUp":
-                    this.props.moveCardUp(this.props.selectedCardId);
-                    break;
-
-                case "ArrowDown":
-                    this.props.moveCardDown(this.props.selectedCardId);
-                    break;
-
-                case "ArrowLeft":
-                    this.props.moveCardLeft(this.props.selectedCardId);
-                    App.setCardFocus(this.props.selectedCardId);
-                    break;
-
-                case "ArrowRight":
-                    this.props.moveCardRight(this.props.selectedCardId);
-                    App.setCardFocus(this.props.selectedCardId);
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-        switch (e.key) {
-            case "z":
-                if (e.ctrlKey) {
-                    this.props.onUndo();
-                }
+            case "Enter":
+                this.startEditCard();
                 break;
 
-            case "y":
-                if (e.ctrlKey) {
-                    this.props.onRedo();
-                }
+            case "ArrowUp":
+                this.props.moveCardUp(this.props.selectedCardId);
+                break;
+
+            case "ArrowDown":
+                this.props.moveCardDown(this.props.selectedCardId);
+                break;
+
+            case "ArrowLeft":
+                this.props.moveCardLeft(this.props.selectedCardId);
+                App.setCardFocus(this.props.selectedCardId);
+                break;
+
+            case "ArrowRight":
+                this.props.moveCardRight(this.props.selectedCardId);
+                App.setCardFocus(this.props.selectedCardId);
                 break;
 
             default:
                 break;
+            }
+        }
+
+        switch (e.key) {
+        case "z":
+            if (e.ctrlKey) {
+                this.props.onUndo();
+            }
+            break;
+
+        case "y":
+            if (e.ctrlKey) {
+                this.props.onRedo();
+            }
+            break;
+
+        default:
+            break;
         }
     };
 

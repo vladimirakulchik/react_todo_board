@@ -1,7 +1,7 @@
-import React from 'react';
-import IconButton from 'material-ui/IconButton';
-import ContentRedo from 'material-ui/svg-icons/content/redo';
-import './Buttons.css';
+import React from "react";
+import IconButton from "material-ui/IconButton";
+import ContentRedo from "material-ui/svg-icons/content/redo";
+import "./Buttons.css";
 
 function RedoButton(props) {
     return (

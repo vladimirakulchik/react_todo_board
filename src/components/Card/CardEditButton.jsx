@@ -1,9 +1,9 @@
-import React from 'react';
-import IconButton from 'material-ui/IconButton';
-import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
-import Popup from '../Popup/Popup';
-import CardEdit from '../Card/CardEdit';
-import './CardEditButton.css';
+import React from "react";
+import IconButton from "material-ui/IconButton";
+import ModeEdit from "material-ui/svg-icons/editor/mode-edit";
+import Popup from "../Popup/Popup";
+import CardEdit from "../Card/CardEdit";
+import "./CardEditButton.css";
 
 class CardEditButton extends React.Component {
     state = {
@@ -20,7 +20,7 @@ class CardEditButton extends React.Component {
                 color: nextProps.color
             });
         }
-    };
+    }
 
     handleTitleChange = (e, value) => {
         this.setState({
@@ -76,7 +76,7 @@ class CardEditButton extends React.Component {
                     />
                 </Popup>
             </div>
-        )
+        );
     }
 }
 

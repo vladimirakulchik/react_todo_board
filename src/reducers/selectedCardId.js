@@ -1,15 +1,15 @@
-import { CARD_SELECT, CARD_DESELECT } from '../constants/ActionTypes';
+import { CARD_SELECT, CARD_DESELECT } from "../constants/ActionTypes";
 
 function selectedCardId(state = null, action) {
     switch (action.type) {
-        case CARD_SELECT:
-            return action.id;
+    case CARD_SELECT:
+        return action.id;
 
-        case CARD_DESELECT:
-            return null;
+    case CARD_DESELECT:
+        return null;
 
-        default:
-            return state;
+    default:
+        return state;
     }
 }
 

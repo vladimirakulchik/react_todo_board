@@ -1,21 +1,21 @@
 .app-toolbar {
-    background-color: transparent !important;
-    height: 100% !important;
-    padding: 0 !important;
+  background-color: transparent !important;
+  height: 100% !important;
+  padding: 0 !important;
 }
 
 .app-toolbar-title {
-    color: #ECEFF1 !important;
-    font-size: 24px !important;
-    line-height: 45px !important;
-    padding: 0 !important;
-    margin: 0 16px !important;
+  color: #ECEFF1 !important;
+  font-size: 24px !important;
+  line-height: 45px !important;
+  padding: 0 !important;
+  margin: 0 16px !important;
 }
 
 .app-toolbar-actions {
-    margin: 0 !important;
+  margin: 0 !important;
 }
 
 .app-toolbar-settings {
-    margin: 0 !important;
+  margin: 0 !important;
 }

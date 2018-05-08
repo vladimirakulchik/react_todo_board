@@ -1,7 +1,7 @@
-import React from 'react';
-import { BACKGROUND_DATA } from '../../constants/BackgroundData';
-import './ImageGallery.css';
-import '../Scrollbar.css';
+import React from "react";
+import { BACKGROUND_DATA } from "../../constants/BackgroundData";
+import "./ImageGallery.css";
+import "../Scrollbar.css";
 
 class ImageGallery extends React.Component {
     render() {
@@ -22,7 +22,7 @@ class ImageGallery extends React.Component {
                 )}
             </div>
         );
-    };
+    }
 }
 
 export default ImageGallery;

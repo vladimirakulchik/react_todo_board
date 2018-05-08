@@ -1,9 +1,9 @@
 .column-header {
-    font-family: sans-serif;
-    flex: 0 0 auto;
-    padding: 10px 20px;
-    position: relative;
-    min-height: 18px;
-    font-weight: bolder;
-    margin: 0;
+  font-family: sans-serif;
+  flex: 0 0 auto;
+  padding: 10px 20px;
+  position: relative;
+  min-height: 18px;
+  font-weight: bolder;
+  margin: 0;
 }

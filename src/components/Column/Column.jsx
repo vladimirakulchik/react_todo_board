@@ -1,12 +1,12 @@
-import React from 'react';
-import { DropTarget } from 'react-dnd';
-import Paper from 'material-ui/Paper';
-import Header from './Header';
-import ListCards from '../ListCards/ListCards';
-import AddCardButton from './AddCardButton';
-import './Column.css';
-import { CARD_TYPE } from '../../constants/ItemTypes';
-import '../Scrollbar.css';
+import React from "react";
+import { DropTarget } from "react-dnd";
+import Paper from "material-ui/Paper";
+import Header from "./Header";
+import ListCards from "../ListCards/ListCards";
+import AddCardButton from "./AddCardButton";
+import { CARD_TYPE } from "../../constants/ItemTypes";
+import "../Scrollbar.css";
+import "./Column.css";
 
 const target = {
     hover(props, monitor) {
@@ -20,7 +20,7 @@ const target = {
 function collectTarget(connect) {
     return {
         connectDropTarget: connect.dropTarget()
-    }
+    };
 }
 
 class Column extends React.Component {

@@ -1,8 +1,8 @@
-import React from 'react';
-import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
-import Popup from '../Popup/Popup';
-import './AddColumnButton.css';
+import React from "react";
+import FlatButton from "material-ui/FlatButton";
+import TextField from "material-ui/TextField";
+import Popup from "../Popup/Popup";
+import "./AddColumnButton.css";
 
 class AddColumnButton extends React.Component {
     state = {
@@ -55,7 +55,7 @@ class AddColumnButton extends React.Component {
                     />
                 </Popup>
             </div>
-        )
+        );
     }
 }
 

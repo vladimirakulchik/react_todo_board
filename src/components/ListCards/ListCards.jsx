@@ -1,8 +1,8 @@
-import React from 'react';
-import List from 'material-ui/List';
-import CardDetails from '../Card/CardDetails';
-import './ListCards.css';
-import '../Scrollbar.css';
+import React from "react";
+import List from "material-ui/List";
+import CardDetails from "../Card/CardDetails";
+import "./ListCards.css";
+import "../Scrollbar.css";
 
 class ListCards extends React.Component {
     render() {

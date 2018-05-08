@@ -1,13 +1,13 @@
 .add-card {
-    flex: 0 0 auto;
+  flex: 0 0 auto;
 }
 
 .add-card-btn {
-    width: 100% !important;
-    height: 100% !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .add-card-popup {
-    width: 30% !important;
-    max-width: none !important;
+  width: 30% !important;
+  max-width: none !important;
 }
