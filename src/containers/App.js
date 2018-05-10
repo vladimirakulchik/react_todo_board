@@ -7,13 +7,16 @@ const mapStateToProps = (state) => ({
     background: state.present.background,
     columnsData: state.present.columnsData.data,
     selectedCardId: state.present.selectedCardId,
-    cardEditing: state.present.cardEditing
+    cardEditing: state.present.cardEditing,
+    menuOpen: state.present.menuOpen
 });
 
 const mapDispatchToProps = (dispatch) => ({
     onBackgroundChange: (background) => dispatch(actions.changeBackground(background)),
     openEditPopup: () => dispatch(actions.openEditPopup()),
     closeEditPopup: () => dispatch(actions.closeEditPopup()),
+    openMenu: () => dispatch(actions.openMenu()),
+    closeMenu: () => dispatch(actions.closeMenu()),
     onColumnAdd: (title) => dispatch(actions.columnAdd(title)),
     onCardAdd: (card) => dispatch(actions.cardAdd(card)),
     onCardUpdate: (card) => dispatch(actions.cardUpdate(card)),

@@ -6,13 +6,9 @@ import ActionSettings from "material-ui/svg-icons/action/settings";
 import "./Buttons.css";
 
 class MenuSettings extends React.Component {
-    showMenu = () => {
-        document.getElementsByClassName("menu")[0].style.display = "block";
-        let menuWidth = document.getElementsByClassName("menu")[0].offsetWidth;
-        document.getElementsByClassName("board")[0].style.marginRight = menuWidth + "px";
-    };
-
     render() {
+        const {openMenu} = this.props;
+
         return (
             <IconMenu
                 iconButtonElement= {
@@ -25,7 +21,7 @@ class MenuSettings extends React.Component {
             >
                 <MenuItem
                     primaryText="Change background"
-                    onClick={this.showMenu}
+                    onClick={openMenu}
                 />
             </IconMenu>
         );

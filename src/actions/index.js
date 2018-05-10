@@ -13,6 +13,15 @@ export const closeEditPopup = () => ({
     type: types.CLOSE_EDIT_POPUP
 });
 
+export const openMenu = () => ({
+    type: types.OPEN_MENU
+});
+
+export const closeMenu = () => ({
+    type: types.CLOSE_MENU
+
+});
+
 export const columnAdd = (title) => ({
     type: types.COLUMN_ADD,
     title

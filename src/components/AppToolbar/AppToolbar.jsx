@@ -8,7 +8,7 @@ import "./AppToolbar.css";
 
 class AppToolbar extends React.Component {
     render() {
-        const {onUndo, onRedo} = this.props;
+        const {openMenu, onUndo, onRedo} = this.props;
 
         return (
             <Toolbar className="app-toolbar">
@@ -21,7 +21,7 @@ class AppToolbar extends React.Component {
 
                 <ToolbarGroup lastChild={false} className="app-toolbar-settings">
                     <AddColumnButton onColumnAdd={this.props.onColumnAdd} />
-                    <MenuSettings />
+                    <MenuSettings openMenu={openMenu} />
                 </ToolbarGroup>
             </Toolbar>
         );

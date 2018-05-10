@@ -3,7 +3,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import HTML5Backend from "react-dnd-html5-backend";
 import { DragDropContext } from "react-dnd";
 import AppToolbar from "./AppToolbar/AppToolbar";
-import Column from "./Column/Column";
+import Board from "./Board/Board";
 import OptionalMenu from "./Menu/OptionalMenu";
 import "./App.css";
 import "./Scrollbar.css";
@@ -131,10 +131,15 @@ class App extends React.Component {
         const {
             background,
             onBackgroundChange,
+            menuOpen,
+            openMenu,
+            closeMenu,
             columnsData,
             onColumnAdd,
             onCardAdd,
+            selectedCardId,
             selectCard,
+            cardEditing,
             onCardDrag,
             onCardDragToColumn,
             onUndo,
@@ -149,42 +154,43 @@ class App extends React.Component {
                     <div className="header">
                         <AppToolbar
                             onColumnAdd={onColumnAdd}
+                            openMenu={openMenu}
                             onUndo={onUndo}
                             onRedo={onRedo}
                         />
                     </div>
 
                     <div className="content">
-                        <div className="board scrollbar">
-                            {columnsData.map(column =>
-                                <Column
-                                    key={column.id}
-                                    columnId={column.id}
-                                    title={column.title}
-                                    cards={column.cards}
-                                    onCardAdd={onCardAdd}
+                        <div className="board scrollbar"
+                            style={{ marginRight: (menuOpen) ? "340px" : "0px" }}>
 
-                                    selectedCardId={this.props.selectedCardId}
-                                    onCardSelect={selectCard}
+                            <Board
+                                columnsData={columnsData}
 
-                                    isEditPopupOpen={this.props.cardEditing}
-                                    onCardEdit={this.onCardEdit}
-                                    onCardEditCancel={this.onCardEditCancel}
+                                onCardAdd={onCardAdd}
+                                onCardUpdate={this.onCardUpdate}
+                                onCardDelete={this.onCardDelete}
 
-                                    onCardUpdate={this.onCardUpdate}
-                                    onCardDelete={this.onCardDelete}
+                                selectedCardId={selectedCardId}
+                                onCardSelect={selectCard}
 
-                                    onCardDrag={onCardDrag}
-                                    onCardDragToColumn={onCardDragToColumn}
-                                />
-                            )}
-                        </div>
+                                isEditPopupOpen={cardEditing}
+                                onCardEdit={this.onCardEdit}
+                                onCardEditCancel={this.onCardEditCancel}
 
-                        <div className="menu">
-                            <OptionalMenu
-                                onBackgroundChange={onBackgroundChange}
+                                onCardDrag={onCardDrag}
+                                onCardDragToColumn={onCardDragToColumn}
                             />
                         </div>
+
+                        {menuOpen &&
+                            <div className="menu" style={{width: "340px"}}>
+                                <OptionalMenu
+                                    closeMenu={closeMenu}
+                                    onBackgroundChange={onBackgroundChange}
+                                />
+                            </div>
+                        }
                     </div>
                 </div>
             </MuiThemeProvider>

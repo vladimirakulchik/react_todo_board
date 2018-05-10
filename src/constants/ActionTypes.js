@@ -1,6 +1,8 @@
 export const BACKGROUND_CHANGE = "BACKGROUND_CHANGE";
 export const OPEN_EDIT_POPUP = "OPEN_EDIT_POPUP";
 export const CLOSE_EDIT_POPUP = "CLOSE_EDIT_POPUP";
+export const OPEN_MENU = "OPEN_MENU";
+export const CLOSE_MENU = "CLOSE_MENU";
 
 export const COLUMN_ADD = "COLUMN_ADD";
 export const CARD_ADD = "CARD_ADD";

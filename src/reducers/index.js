@@ -4,17 +4,21 @@ import background from "./background";
 import columnsData from "./columnsData";
 import selectedCardId from "./selectedCardId";
 import cardEditing from "./cardEditing";
+import menuOpen from "./menuOpen";
 import * as types from "../constants/ActionTypes";
 
 const rootReducer = combineReducers({
     background,
     columnsData,
     selectedCardId,
-    cardEditing
+    cardEditing,
+    menuOpen
 });
 
 const actions = [
     types.BACKGROUND_CHANGE,
+    types.OPEN_MENU,
+    types.CLOSE_MENU,
     types.COLUMN_ADD,
     types.CARD_ADD,
     types.CARD_UPDATE,
