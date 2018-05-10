@@ -33,7 +33,7 @@ class AddColumnButton extends React.Component {
 
     render() {
         return(
-            <div>
+            <React.Fragment>
                 <FlatButton className="add-list-btn" onClick={this.togglePopup}>
                     Add a list
                 </FlatButton>
@@ -54,7 +54,7 @@ class AddColumnButton extends React.Component {
                         underlineStyle={{borderColor: "green"}}
                     />
                 </Popup>
-            </div>
+            </React.Fragment>
         );
     }
 }

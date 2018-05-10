@@ -52,7 +52,7 @@ class CardEditButton extends React.Component {
         const {isOpen, onCardEdit, onCardEditCancel, onCardDelete} = this.props;
 
         return(
-            <div>
+            <React.Fragment>
                 <IconButton className="card-edit-btn" onClick={onCardEdit}>
                     <ModeEdit />
                 </IconButton>
@@ -75,7 +75,7 @@ class CardEditButton extends React.Component {
                         onColorChange={this.handleColorChange}
                     />
                 </Popup>
-            </div>
+            </React.Fragment>
         );
     }
 }
