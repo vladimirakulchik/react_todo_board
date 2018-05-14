@@ -1,29 +1,26 @@
 import React from "react";
-import IconMenu from "material-ui/IconMenu";
-import MenuItem from "material-ui/MenuItem";
-import IconButton from "material-ui/IconButton";
-import ActionSettings from "material-ui/svg-icons/action/settings";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import IconButton from "@material-ui/core/IconButton";
+import Settings from "@material-ui/icons/Settings";
 import "./Buttons.css";
 
 function MenuSettings(props) {
     const {openMenu} = props;
 
     return (
-        <IconMenu
-            iconButtonElement= {
-                <IconButton className="icon-btn">
-                    <ActionSettings className="icon" />
-                </IconButton>
-            }
-            anchorOrigin={{horizontal: "right", vertical: "top"}}
-            targetOrigin={{horizontal: "right", vertical: "top"}}
-        >
+        <React.Fragment>
+            <IconButton className="icon-btn">
+                <Settings className="icon" />
+            </IconButton>
 
-            <MenuItem
-                primaryText="Change background"
-                onClick={openMenu}
-            />
-        </IconMenu>
+            <Menu>
+                <MenuItem
+                    primaryText="Change background"
+                    onClick={openMenu}
+                />
+            </Menu>
+        </React.Fragment>
     );
 }
 

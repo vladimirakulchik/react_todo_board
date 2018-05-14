@@ -1,5 +1,6 @@
 import React from "react";
-import {Toolbar, ToolbarGroup, ToolbarTitle} from "material-ui/Toolbar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 import RedoButton from "./RedoButton";
 import UndoButton from "./UndoButton";
 import AddColumnButton from "./AddColumnButton";
@@ -10,18 +11,20 @@ function AppToolbar(props) {
     const {openMenu, onColumnAdd, onUndo, onRedo} = props;
 
     return (
-        <Toolbar className="app-toolbar">
-            <ToolbarGroup firstChild={true} className="app-toolbar-actions">
+        <Toolbar>
+            <div className="app-toolbar-actions">
                 <UndoButton onUndo={onUndo} />
                 <RedoButton onRedo={onRedo} />
-            </ToolbarGroup>
+            </div>
 
-            <ToolbarTitle className="app-toolbar-title" text="TODO Board" />
+            <Typography className="app-toolbar-title" variant="title">
+                TODO Board
+            </Typography>
 
-            <ToolbarGroup lastChild={false} className="app-toolbar-settings">
+            <div className="app-toolbar-settings">
                 <AddColumnButton onColumnAdd={onColumnAdd} />
                 <MenuSettings openMenu={openMenu} />
-            </ToolbarGroup>
+            </div>
         </Toolbar>
     );
 }

@@ -1,6 +1,6 @@
 import React from "react";
-import FlatButton from "material-ui/FlatButton";
-import TextField from "material-ui/TextField";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 import Popup from "../Popup/Popup";
 import "./AddColumnButton.css";
 
@@ -34,9 +34,9 @@ class AddColumnButton extends React.Component {
     render() {
         return(
             <React.Fragment>
-                <FlatButton className="add-list-btn" onClick={this.togglePopup}>
+                <Button className="add-list-btn" onClick={this.togglePopup}>
                     Add a list
-                </FlatButton>
+                </Button>
 
                 <Popup
                     popupStyle="add-list-popup"

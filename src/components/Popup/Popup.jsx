@@ -1,6 +1,6 @@
 import React from "react";
-import RaisedButton from "material-ui/RaisedButton";
-import Dialog from "material-ui/Dialog";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
 import "./Popup.css";
 
 class Popup extends React.Component {
@@ -8,7 +8,9 @@ class Popup extends React.Component {
         const {isDelete, onSave, onCancel, onDelete} = this.props;
 
         let deleteButton = (isDelete)
-            ? <RaisedButton className="action-btn-delete"
+            ? <Button
+                variant="raised"
+                className="action-btn-delete"
                 label="Delete"
                 primary={true}
                 onClick={onDelete} />
@@ -16,13 +18,17 @@ class Popup extends React.Component {
 
         return [
             deleteButton,
-            <RaisedButton className="action-btn"
+            <Button
+                variant="raised"
+                className="action-btn"
                 label="Save"
                 key="save"
                 primary={true}
                 onClick={onSave}
             />,
-            <RaisedButton className="action-btn"
+            <Button
+                variant="raised"
+                className="action-btn"
                 label="Cancel"
                 key="cancel"
                 primary={true}

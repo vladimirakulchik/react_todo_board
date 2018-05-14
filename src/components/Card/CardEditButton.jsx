@@ -1,6 +1,6 @@
 import React from "react";
-import IconButton from "material-ui/IconButton";
-import ModeEdit from "material-ui/svg-icons/editor/mode-edit";
+import IconButton from "@material-ui/core/IconButton";
+import ModeEdit from "@material-ui/icons/ModeEdit";
 import Popup from "../Popup/Popup";
 import CardEdit from "../Card/CardEdit";
 import "./CardEditButton.css";

@@ -1,6 +1,6 @@
 import React from "react";
 import { DropTarget } from "react-dnd";
-import Paper from "material-ui/Paper";
+import Paper from "@material-ui/core/Paper";
 import Header from "./Header";
 import ListCards from "../ListCards/ListCards";
 import AddCardButton from "./AddCardButton";

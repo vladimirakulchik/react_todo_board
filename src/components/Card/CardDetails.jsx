@@ -1,6 +1,6 @@
 import React from "react";
-import ListItem from "material-ui/List";
-import {Card, CardTitle, CardText} from "material-ui/Card";
+import ListItem from "@material-ui/core/ListItem";
+import {Card, CardTitle, CardText} from "@material-ui/core/Card";
 import { DragSource, DropTarget } from "react-dnd";
 import CardEditButton from "./CardEditButton";
 import { CARD_TYPE } from "../../constants/ItemTypes";

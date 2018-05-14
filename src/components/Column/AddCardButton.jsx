@@ -1,5 +1,5 @@
 import React from "react";
-import FlatButton from "material-ui/FlatButton";
+import Button from "@material-ui/core/Button";
 import Popup from "../Popup/Popup";
 import CardEdit from "../Card/CardEdit";
 import "./AddCardButton.css";
@@ -51,9 +51,9 @@ class AddCardButton extends React.Component {
     render() {
         return(
             <div className="add-card">
-                <FlatButton className="add-card-btn" tabIndex={-1} onClick={this.togglePopup}>
+                <Button className="add-card-btn" tabIndex={-1} onClick={this.togglePopup}>
                     Add a card
-                </FlatButton>
+                </Button>
 
                 <Popup
                     popupStyle="add-card-popup"
