@@ -3,30 +3,6 @@
   border-radius: 20px;
 }
 
-.list-cards-item {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.card-details {
-  position: relative;
-  padding: 0 4px !important;
-  cursor: pointer !important;
-  min-height: 50px !important;
-}
-
-.card-details:focus {
-  border: 3px solid #6D14AB !important;
-}
-
-.card-title {
-  padding: 6px 6px 2px 8px !important;
-}
-
-.card-text {
-  padding: 6px 6px 6px 8px !important;
-}
-
 .card-details:hover .card-edit-btn {
   display:block !important;
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import HTML5Backend from "react-dnd-html5-backend";
 import { DragDropContext } from "react-dnd";
 import AppToolbar from "./AppToolbar/AppToolbar";
@@ -9,7 +8,7 @@ import "./App.css";
 import "./Scrollbar.css";
 
 class App extends React.Component {
-    componentWillMount() {
+    componentDidMount() {
         document.getElementsByTagName("body")[0].addEventListener("keydown", this.onKeyDown);
         document.getElementsByTagName("body")[0].addEventListener("mousedown", this.onMouseDown);
     }
@@ -149,51 +148,49 @@ class App extends React.Component {
         App.setAppBackground(background);
 
         return (
-            <MuiThemeProvider>
-                <div className="app">
-                    <div className="header">
-                        <AppToolbar
-                            onColumnAdd={onColumnAdd}
-                            openMenu={openMenu}
-                            onUndo={onUndo}
-                            onRedo={onRedo}
+            <div className="app">
+                <div className="header">
+                    <AppToolbar
+                        onColumnAdd={onColumnAdd}
+                        openMenu={openMenu}
+                        onUndo={onUndo}
+                        onRedo={onRedo}
+                    />
+                </div>
+
+                <div className="content">
+                    <div className="board scrollbar"
+                        style={{ marginRight: (menuOpen) ? "340px" : "0px" }}>
+
+                        <Board
+                            columnsData={columnsData}
+
+                            onCardAdd={onCardAdd}
+                            onCardUpdate={this.onCardUpdate}
+                            onCardDelete={this.onCardDelete}
+
+                            selectedCardId={selectedCardId}
+                            onCardSelect={selectCard}
+
+                            isEditPopupOpen={cardEditing}
+                            onCardEdit={this.onCardEdit}
+                            onCardEditCancel={this.onCardEditCancel}
+
+                            onCardDrag={onCardDrag}
+                            onCardDragToColumn={onCardDragToColumn}
                         />
                     </div>
 
-                    <div className="content">
-                        <div className="board scrollbar"
-                            style={{ marginRight: (menuOpen) ? "340px" : "0px" }}>
-
-                            <Board
-                                columnsData={columnsData}
-
-                                onCardAdd={onCardAdd}
-                                onCardUpdate={this.onCardUpdate}
-                                onCardDelete={this.onCardDelete}
-
-                                selectedCardId={selectedCardId}
-                                onCardSelect={selectCard}
-
-                                isEditPopupOpen={cardEditing}
-                                onCardEdit={this.onCardEdit}
-                                onCardEditCancel={this.onCardEditCancel}
-
-                                onCardDrag={onCardDrag}
-                                onCardDragToColumn={onCardDragToColumn}
+                    {menuOpen &&
+                        <div className="menu" style={{width: "340px"}}>
+                            <OptionalMenu
+                                closeMenu={closeMenu}
+                                onBackgroundChange={onBackgroundChange}
                             />
                         </div>
-
-                        {menuOpen &&
-                            <div className="menu" style={{width: "340px"}}>
-                                <OptionalMenu
-                                    closeMenu={closeMenu}
-                                    onBackgroundChange={onBackgroundChange}
-                                />
-                            </div>
-                        }
-                    </div>
+                    }
                 </div>
-            </MuiThemeProvider>
+            </div>
         );
     }
 }

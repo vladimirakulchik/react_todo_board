@@ -1,5 +1,6 @@
 import React from "react";
 import { DropTarget } from "react-dnd";
+import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Header from "./Header";
 import ListCards from "../ListCards/ListCards";
@@ -7,6 +8,19 @@ import AddCardButton from "./AddCardButton";
 import { CARD_TYPE } from "../../constants/ItemTypes";
 import "../Scrollbar.css";
 import "./Column.css";
+
+const styles = {
+    columnContent: {
+        backgroundColor: "#EEEEEE",
+        borderRadius: "5px",
+        display: "flex",
+        flexDirection: "column",
+        maxHeight: "100%",
+        minHeight: "70px",
+        position: "relative",
+        whiteSpace: "normal"
+    }
+};
 
 const target = {
     hover(props, monitor) {
@@ -41,6 +55,7 @@ class Column extends React.Component {
 
     render() {
         const {
+            classes,
             title,
             cards,
             selectedCardId, onCardSelect,
@@ -52,7 +67,7 @@ class Column extends React.Component {
 
         return connectDropTarget(
             <div className="column">
-                <Paper className="column-content" zDepth={3}>
+                <Paper classes={{root: classes.columnContent}} elevation={5}>
                     <Header title={title} />
 
                     <ListCards
@@ -78,4 +93,4 @@ class Column extends React.Component {
     }
 }
 
-export default DropTarget(CARD_TYPE, target, collectTarget)(Column);
+export default withStyles(styles)(DropTarget(CARD_TYPE, target, collectTarget)(Column));

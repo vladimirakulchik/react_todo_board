@@ -1,27 +1,72 @@
 import React from "react";
+import { withStyles } from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import IconButton from "@material-ui/core/IconButton";
 import Settings from "@material-ui/icons/Settings";
-import "./Buttons.css";
 
-function MenuSettings(props) {
-    const {openMenu} = props;
+const styles = {
+    iconBtn: {
+        backgroundColor: "rgba(255, 255, 255, 0.15)",
+        width: "40px",
+        height: "40px",
+        marginRight: "8px",
+        padding: "8px",
+        borderRadius: "5px",
+        "&:hover": {
+            backgroundColor: "rgba(255, 255, 255, 0.5)"
+        }
+    },
+    icon: {
+        color: "white"
+    }
+};
 
-    return (
-        <React.Fragment>
-            <IconButton className="icon-btn">
-                <Settings className="icon" />
-            </IconButton>
+class MenuSettings extends React.Component {
+    state = {
+        anchorEl: null,
+    };
 
-            <Menu>
-                <MenuItem
-                    primaryText="Change background"
-                    onClick={openMenu}
-                />
-            </Menu>
-        </React.Fragment>
-    );
+    handleClick = (event) => {
+        this.setState({ anchorEl: event.currentTarget });
+    };
+
+    handleClose = () => {
+        this.setState({ anchorEl: null });
+    };
+
+    openMenu = () => {
+        this.handleClose();
+        this.props.openMenu();
+    };
+
+    render() {
+        const {anchorEl} = this.state;
+        const {classes} = this.props;
+
+        return (
+            <React.Fragment>
+                <IconButton
+                    classes={{root: classes.iconBtn}}
+                    aria-owns={anchorEl ? "simple-menu" : null}
+                    aria-haspopup="true"
+                    onClick={this.handleClick}
+                >
+                    <Settings classes={{root: classes.icon}} />
+                </IconButton>
+
+                <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    open={Boolean(anchorEl)}
+                    onClose={this.handleClose}
+                >
+                    <MenuItem onClick={this.openMenu}>Change background</MenuItem>
+                </Menu>
+            </React.Fragment>
+        );
+    }
+
 }
 
-export default MenuSettings;
+export default withStyles(styles)(MenuSettings);

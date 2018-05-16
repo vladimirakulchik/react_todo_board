@@ -1,9 +1,30 @@
 import React from "react";
+import { withStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import ModeEdit from "@material-ui/icons/ModeEdit";
 import Popup from "../Popup/Popup";
 import CardEdit from "../Card/CardEdit";
-import "./CardEditButton.css";
+
+const styles = {
+    cardEditBtn: {
+        backgroundColor: "rgba(0, 0, 0, 0.1)",
+        opacity: 0.8,
+        width: "30px",
+        height: "30px",
+        borderRadius: "3px",
+        padding: "4px",
+        margin: "8px",
+        zIndex: 100,
+        position: "absolute",
+        top: "8px",
+        right: "4px",
+        display: "none"
+    },
+    cardEditPopup: {
+        width: "30%",
+        maxWidth: "none"
+    }
+};
 
 class CardEditButton extends React.Component {
     state = {
@@ -12,25 +33,29 @@ class CardEditButton extends React.Component {
         color: this.props.color
     };
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps !== this.props) {
-            this.setState({
-                title: nextProps.title,
-                text: nextProps.text,
-                color: nextProps.color
-            });
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if ((nextProps.title === prevState.title) &&
+            (nextProps.text === prevState.text) &&
+            (nextProps.color === prevState.color)) {
+            return null;
         }
+
+        return {
+            title: nextProps.title,
+            text: nextProps.text,
+            color: nextProps.color
+        };
     }
 
-    handleTitleChange = (e, value) => {
+    handleTitleChange = (event) => {
         this.setState({
-            title: value
+            title: event.target.value
         });
     };
 
-    handleTextChange = (e, value) => {
+    handleTextChange = (event) => {
         this.setState({
-            text: value
+            text: event.target.value
         });
     };
 
@@ -49,19 +74,21 @@ class CardEditButton extends React.Component {
     };
 
     render() {
-        const {isOpen, onCardEdit, onCardEditCancel, onCardDelete} = this.props;
+        const {classes, isOpen, onCardEdit, onCardEditCancel, onCardDelete} = this.props;
 
         return(
             <React.Fragment>
-                <IconButton className="card-edit-btn" onClick={onCardEdit}>
+                <IconButton classes={{root: classes.cardEditBtn}}
+                    className="card-edit-btn"
+                    onClick={onCardEdit}
+                >
                     <ModeEdit />
                 </IconButton>
 
                 <Popup
-                    popupStyle="card-edit-popup"
                     title="Edit card"
-                    isDelete={true}
                     isOpen={isOpen}
+                    isDelete={true}
                     onSave={this.onSave}
                     onCancel={onCardEditCancel}
                     onDelete={onCardDelete}
@@ -80,4 +107,4 @@ class CardEditButton extends React.Component {
     }
 }
 
-export default CardEditButton;
+export default withStyles(styles)(CardEditButton);

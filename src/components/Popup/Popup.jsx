@@ -1,59 +1,75 @@
 import React from "react";
+import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
-import "./Popup.css";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
-class Popup extends React.Component {
-    getButtons() {
-        const {isDelete, onSave, onCancel, onDelete} = this.props;
-
-        let deleteButton = (isDelete)
-            ? <Button
-                variant="raised"
-                className="action-btn-delete"
-                label="Delete"
-                primary={true}
-                onClick={onDelete} />
-            : null;
-
-        return [
-            deleteButton,
-            <Button
-                variant="raised"
-                className="action-btn"
-                label="Save"
-                key="save"
-                primary={true}
-                onClick={onSave}
-            />,
-            <Button
-                variant="raised"
-                className="action-btn"
-                label="Cancel"
-                key="cancel"
-                primary={true}
-                onClick={onCancel}
-            />
-        ];
+const styles = {
+    popupPaper: {
+        backgroundColor: "snow",
+        borderRadius: "10px"
+    },
+    popupContent: {
+        padding: "0 16px 8px 16px"
+    },
+    actionBtn: {
+        margin: "5px 16px",
+        minWidth: "100px"
+    },
+    deleteBtn: {
+        position: "absolute",
+        left: "16px",
+        minWidth: "100px"
     }
+};
 
-    render() {
-        const {popupStyle, title, isOpen, onCancel, children} = this.props;
+function Popup(props) {
+    const {classes, title, isOpen, isDelete, onDelete, onSave, onCancel, children} = props;
 
-        return(
-            <Dialog
-                title={title}
-                actions={this.getButtons()}
-                modal={false}
-                open={isOpen}
-                onRequestClose={onCancel}
-                contentClassName={popupStyle}
-                paperClassName="popup-paper"
-            >
-                {children}
-            </Dialog>
-        );
-    }
+    return (
+        <Dialog
+            classes={{paper: classes.popupPaper}}
+            open={isOpen}
+            onClose={onCancel}
+        >
+            <DialogTitle>{title}</DialogTitle>
+
+            <DialogContent classes={{root: classes.popupContent}}>{children}</DialogContent>
+
+            <DialogActions>
+                {isDelete &&
+                    <Button
+                        classes={{root: classes.deleteBtn}}
+                        onClick={onDelete}
+                        variant="raised"
+                        color="primary"
+                    >
+                        Delete
+                    </Button>
+                }
+
+                <Button
+                    classes={{root: classes.actionBtn}}
+                    onClick={onSave}
+                    variant="raised"
+                    color="primary"
+                >
+                    Save
+                </Button>
+
+                <Button
+                    classes={{root: classes.actionBtn}}
+                    onClick={onCancel}
+                    variant="raised"
+                    color="primary"
+                >
+                    Cancel
+                </Button>
+            </DialogActions>
+        </Dialog>
+    );
 }
 
-export default Popup;
+export default withStyles(styles)(Popup);

@@ -1,8 +1,22 @@
 import React from "react";
+import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Popup from "../Popup/Popup";
-import "./AddColumnButton.css";
+
+const styles = {
+    addListBtn: {
+        color: "white",
+        backgroundColor: "rgba(255, 255, 255, 0.15)",
+        height: "40px",
+        margin: "0 16px",
+        padding: "0 20px",
+        borderRadius: "5px",
+        "&:hover": {
+            backgroundColor: "rgba(255, 255, 255, 0.5)"
+        }
+    }
+};
 
 class AddColumnButton extends React.Component {
     state = {
@@ -12,7 +26,8 @@ class AddColumnButton extends React.Component {
 
     togglePopup = () => {
         this.setState({
-            open: !this.state.open
+            open: !this.state.open,
+            title: ""
         });
     };
 
@@ -21,37 +36,42 @@ class AddColumnButton extends React.Component {
         this.props.onColumnAdd(this.state.title);
     };
 
-    handleTitleChange = (e, value) => {
+    handleTitleChange = (event) => {
+        let value = event.target.value;
+
         if (value.length <= 20) {
             this.setState({
                 title: value
             });
         } else {
-            e.target.value = this.state.title;
+            event.target.value = this.state.title;
         }
     };
 
     render() {
+        const {classes} = this.props;
+
         return(
             <React.Fragment>
-                <Button className="add-list-btn" onClick={this.togglePopup}>
+                <Button classes={{root: classes.addListBtn}} onClick={this.togglePopup}>
                     Add a list
                 </Button>
 
                 <Popup
-                    popupStyle="add-list-popup"
                     title="Add a list"
                     isOpen={this.state.open}
+                    isDelete={false}
                     onSave={this.onSave}
                     onCancel={this.togglePopup}
                 >
                     <TextField
-                        className="add-list-title"
+                        id="listTitle"
+                        label="List title"
+                        value={this.state.title}
                         onChange={this.handleTitleChange}
-                        floatingLabelText="List title"
-                        floatingLabelStyle={{color: "green"}}
-                        floatingLabelFocusStyle={{color: "gray"}}
-                        underlineStyle={{borderColor: "green"}}
+                        margin="normal"
+                        autoFocus
+                        fullWidth
                     />
                 </Popup>
             </React.Fragment>
@@ -59,4 +79,4 @@ class AddColumnButton extends React.Component {
     }
 }
 
-export default AddColumnButton;
+export default withStyles(styles)(AddColumnButton);

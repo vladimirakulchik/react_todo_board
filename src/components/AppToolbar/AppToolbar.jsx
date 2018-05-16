@@ -1,32 +1,43 @@
 import React from "react";
+import { withStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import RedoButton from "./RedoButton";
 import UndoButton from "./UndoButton";
 import AddColumnButton from "./AddColumnButton";
 import MenuSettings from "./MenuSettings";
-import "./AppToolbar.css";
+
+const styles = {
+    toolbar: {
+        backgroundColor: "transparent",
+        height: "100%",
+        minHeight: "100%",
+        padding: 0
+    },
+    title: {
+        color: "#ECEFF1",
+        fontSize: "24px",
+        lineHeight: "40px",
+        margin: "0 auto"
+    }
+};
 
 function AppToolbar(props) {
-    const {openMenu, onColumnAdd, onUndo, onRedo} = props;
+    const {classes, openMenu, onColumnAdd, onUndo, onRedo} = props;
 
     return (
-        <Toolbar>
-            <div className="app-toolbar-actions">
-                <UndoButton onUndo={onUndo} />
-                <RedoButton onRedo={onRedo} />
-            </div>
+        <Toolbar classes={{root: classes.toolbar}}>
+            <UndoButton onUndo={onUndo} />
+            <RedoButton onRedo={onRedo} />
 
-            <Typography className="app-toolbar-title" variant="title">
+            <Typography classes={{root: classes.title}} variant="title">
                 TODO Board
             </Typography>
 
-            <div className="app-toolbar-settings">
-                <AddColumnButton onColumnAdd={onColumnAdd} />
-                <MenuSettings openMenu={openMenu} />
-            </div>
+            <AddColumnButton onColumnAdd={onColumnAdd} />
+            <MenuSettings openMenu={openMenu} />
         </Toolbar>
     );
 }
 
-export default AppToolbar;
+export default withStyles(styles)(AppToolbar);

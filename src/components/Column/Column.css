@@ -1,23 +1,12 @@
 .column {
-  width: 270px !important;
-  height: 100% !important;
-  margin: 0 10px !important;
-  display: inline-block !important;
-  vertical-align: top !important;
-  white-space: nowrap !important;
+  width: 270px;
+  height: 100%;
+  margin: 0 10px;
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
 }
 
 .column:first-child {
-  margin-left: 20px !important;
-}
-
-.column-content {
-  background-color: #EEEEEE !important;
-  border-radius: 5px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  max-height: 100% !important;
-  min-height: 70px !important;
-  position: relative !important;
-  white-space: normal !important;
+  margin-left: 20px;
 }

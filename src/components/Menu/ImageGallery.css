@@ -1,9 +1,9 @@
 .image-gallery {
-  flex: 1 1 auto !important;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  margin: 0 4px !important;
-  padding: 8px 12px 8px 8px !important;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 0 4px;
+  padding: 8px 12px 8px 8px;
 }
 
 .background-section {

@@ -2,14 +2,13 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import Popup from "../Popup/Popup";
 import CardEdit from "../Card/CardEdit";
-import "./AddCardButton.css";
 
 class AddCardButton extends React.Component {
     state = {
         open: false,
         title: "",
         text: "",
-        color: "white"
+        color: "#FFFFFF"
     };
 
     togglePopup = () => {
@@ -17,7 +16,7 @@ class AddCardButton extends React.Component {
             open: !this.state.open,
             title: "",
             text: "",
-            color: "white"
+            color: "#FFFFFF"
         });
     };
 
@@ -30,15 +29,15 @@ class AddCardButton extends React.Component {
         });
     };
 
-    handleTitleChange = (e, value) => {
+    handleTitleChange = (event) => {
         this.setState({
-            title: value
+            title: event.target.value
         });
     };
 
-    handleTextChange = (e, value) => {
+    handleTextChange = (event) => {
         this.setState({
-            text: value
+            text: event.target.value
         });
     };
 
@@ -50,16 +49,15 @@ class AddCardButton extends React.Component {
 
     render() {
         return(
-            <div className="add-card">
-                <Button className="add-card-btn" tabIndex={-1} onClick={this.togglePopup}>
+            <React.Fragment>
+                <Button onClick={this.togglePopup} tabIndex={-1}>
                     Add a card
                 </Button>
 
                 <Popup
-                    popupStyle="add-card-popup"
                     title="Add a card"
-                    isDelete={false}
                     isOpen={this.state.open}
+                    isDelete={false}
                     onSave={this.onSave}
                     onCancel={this.togglePopup}
                 >
@@ -72,7 +70,7 @@ class AddCardButton extends React.Component {
                         onColorChange={this.handleColorChange}
                     />
                 </Popup>
-            </div>
+            </React.Fragment>
         );
     }
 }

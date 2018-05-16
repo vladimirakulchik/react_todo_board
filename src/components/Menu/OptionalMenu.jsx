@@ -1,14 +1,24 @@
 import React from "react";
+import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import MenuHeader from "./MenuHeader";
 import ImageGallery from "./ImageGallery";
-import "./OptionalMenu.css";
+
+const styles = {
+    optionalMenu: {
+        position: "relative",
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        whiteSpace: "normal"
+    }
+};
 
 function OptionalMenu(props) {
-    const {closeMenu, onBackgroundChange} = props;
+    const {classes, closeMenu, onBackgroundChange} = props;
 
     return (
-        <Paper className="optional-menu" zDepth={3}>
+        <Paper classes={{root: classes.optionalMenu}} elevation={5}>
             <MenuHeader
                 title="Background image"
                 onClose={closeMenu}
@@ -21,4 +31,4 @@ function OptionalMenu(props) {
     );
 }
 
-export default OptionalMenu;
+export default withStyles(styles)(OptionalMenu);
